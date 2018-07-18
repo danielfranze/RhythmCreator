@@ -9,7 +9,7 @@ const BUILD_DIR = path.resolve(__dirname, 'build/public');
 // config and build process
 var config = {
     mode: 'production',
-    entry: SOURCE_DIR + '/app.js',
+    entry: SOURCE_DIR + '/app.jsx',
     output: {
         path: BUILD_DIR,
         publicPath: 'public/',
