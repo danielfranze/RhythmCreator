@@ -3,15 +3,15 @@ var webpack = require('webpack');
 var path = require('path');
 
 // define consts
-const SOURCE_DIR = path.resolve(__dirname, 'src/');
+const SOURCE_DIR = path.resolve(__dirname, './src/');
 const BUILD_DIR = path.resolve(__dirname, 'build/public');
 
 // config and build process
 var config = {
     mode: 'production',
-    entry: './src/app.js', //SOURCE_DIR + '/app.js',
+    entry: SOURCE_DIR + '/app.js',
     output: {
-        path: `${__dirname}/build/public/`, //BUILD_DIR,
+        path: BUILD_DIR,
         publicPath: 'public/',
         filename: "bundle.js"
     },
