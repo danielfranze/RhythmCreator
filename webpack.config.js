@@ -5,11 +5,12 @@ var path = require('path');
 // define consts
 const SOURCE_DIR = path.resolve(__dirname, './src/');
 const BUILD_DIR = path.resolve(__dirname, 'build/public');
+const PORT_DEV_SERVER = 3434;
 
 // config and build process
 var config = {
     mode: 'production',
-    entry: SOURCE_DIR + '/app.jsx',
+    entry: ['webpack-dev-server/client?http://localhost:' + PORT_DEV_SERVER, SOURCE_DIR + '/index.js'],
     output: {
         path: BUILD_DIR,
         publicPath: 'public/',
@@ -20,19 +21,23 @@ var config = {
         inline: true,
         progress: true,
         contentBase: path.resolve('build'),
-        port: 3434
+        port: PORT_DEV_SERVER
     },
     module: {
         rules: [
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                use: 'babel-loader'
+                loader: 'babel-loader'
             },
             {
-                test: /\.sass$/,
+                test: /\.(sass|css)$/,
                 use: ['style-loader', 'css-loader', 'sass-loader']
-            }
+            },
+            {
+                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                loader: 'url-loader?limit=100000'
+              }
         ]
     }
 }
