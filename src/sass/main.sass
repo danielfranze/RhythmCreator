@@ -1,3 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Markazi+Text|Roboto:400,400i,700,700i')
+
+$lightgrey: #F2F2F2;
+$grey: #D3D3D3;
+$darkgrey: #686868;
+
+/***********************************
+ *           MainManu 
+ ***********************************/
+
 h1 
-  color: blue
-  text-decoration: underline
+  font-size: 4.375em !important
+  font-family: 'Roboto', sans-serif !important
+
+  .header_title_left
+    color: $darkgrey !important
+  
+  .header_title_right
+    color: $lightgrey !important
+
+.ui.inverted.green.menu, .ui.inverted.menu .green.active.item 
+    background-color: $grey !important
+
+.ui.inverted.menu .item, .ui.inverted.menu .item > a:not(.ui) 
+    background: 0 0 !important
+    color: $darkgrey !important
