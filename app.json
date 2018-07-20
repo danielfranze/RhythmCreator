@@ -1,0 +1,8 @@
+{
+    "name": "RhythmCreator",
+    "description": "An Open-Source tool for creating rhythms.",
+    "env": {
+        "NPM_CONFIG_PRODUCTION": "false",
+        "NODE_ENV": "development"
+      }
+}
