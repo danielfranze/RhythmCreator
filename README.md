@@ -5,8 +5,7 @@ See also: https://en.wikipedia.org/wiki/Drum_machine.
 
 Live Demo
 --------------------
-https://connectfourweb.herokuapp.com/
-
+https://rhythmcreator.herokuapp.com/
 
 
 License
