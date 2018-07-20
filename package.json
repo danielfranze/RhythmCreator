@@ -9,8 +9,8 @@
     "build": "webpack",
     "build:dev": "webpack-dev-server --contentBase=build/",
     "server": "webpack-dev-server --hot --mode development --open --watch",
-    "postinstall": "gulp build",
-    "heroku-init": "gulp build && http-server ./build -p ${PORT:=5000} -c-1 -e"
+    "postinstall": "npm run build",
+    "heroku-init": "http-server ./build -p ${PORT:=5000} -c-1 -e"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,6 @@
     "babel-preset-react": "^6.24.1",
     "css-loader": "^1.0.0",
     "file-loader": "^1.1.11",
-    "gulp": "^3.9.1",
     "http-server": "^0.11.1",
     "node-sass": "^4.9.2",
     "path": "^0.12.7",
