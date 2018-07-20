@@ -1,20 +1,17 @@
 import React, { Component } from 'react'
-import { Menu, Icon, Header, Dropdown} from 'semantic-ui-react'
+import { Menu, Icon, Header, Dropdown, Modal, Button} from 'semantic-ui-react'
 import '../sass/main.sass';
-import MainMenuModal from './mainmenu_modal.jsx';
+
 
 export default class MainMenu extends Component {
-  constructor(props){
-    super(props);
-      
-    this.state = {
-      disabled: false
-    }
-  }
+  state = { modalOpen: false }
+
+  handleOpen = () => this.setState({ modalOpen: true })
+
+  handleClose = () => this.setState({ modalOpen: false })
 
   render() {
 
-    const { activeItem } = this.state
 
     return (
 
@@ -34,7 +31,35 @@ export default class MainMenu extends Component {
         <Dropdown.Menu >
           <Dropdown.Item icon='folder' text='Open'/>
           <Dropdown.Item icon='file' text='Save'/>
-          <MainMenuModal />
+
+
+            <Modal
+            dimmer="blurring"
+            trigger={<Dropdown.Item icon='trash' text='Reset' onClick={this.handleOpen}></Dropdown.Item>}
+            open={this.state.modalOpen}
+            onClose={this.handleClose}
+            basic
+            size='large'
+          >
+            <Header size='huge' icon='question' content='Confirm Deletion' />
+            <Modal.Content>
+              <h3>
+                  <p><Icon size='huge' name='angle double right'/>This will delete all of your inputs!</p> 
+                  <p><Icon size='huge' name='angle double right'/>Are you sure you want to permanently remove your inputs?</p>
+              </h3>
+            </Modal.Content>
+            <Modal.Actions>
+            <Button size='huge' color='green' onClick={this.handleClose} inverted>
+                <Icon size='huge' name='checkmark' /> No
+              </Button>
+
+              <Button size='huge' color='red' onClick={this.handleClose} inverted>
+                <Icon size='huge' name='delete' /> Delete
+              </Button>
+            </Modal.Actions>
+          </Modal>
+
+
         </Dropdown.Menu>
       </Dropdown>
 
