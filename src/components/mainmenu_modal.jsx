@@ -17,7 +17,7 @@ class MainMenuModal extends Component {
           open={this.state.modalOpen}
           onClose={this.handleClose}
           basic
-          size='massive'
+          size='large'
         >
           <Header size='huge' icon='question' content='Confirm Deletion' />
           <Modal.Content>
