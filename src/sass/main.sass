@@ -18,9 +18,32 @@ h1
   .header_title_right
     color: $lightgrey !important
 
-.ui.inverted.green.menu, .ui.inverted.menu .green.active.item 
-    background-color: $grey !important
+
+.ui.inverted.menu
+    border: 0 solid transparent !important
+    background: $grey !important
 
 .ui.inverted.menu .item, .ui.inverted.menu .item > a:not(.ui) 
     background: 0 0 !important
     color: $darkgrey !important
+
+
+
+@media only screen and (min-width : 768px)
+  .ui.top.right.pointing.dropdown > .menu
+    top: 100%
+    bottom: auto
+    right: 50px !important
+    left: auto
+    margin: 1em 0 0
+    min-width: 150px !important
+
+
+
+/***********************************
+ *           MainManu Modal
+ ***********************************/
+
+p 
+  font-size: 1.5em !important
+  font-family: 'Roboto', sans-serif !important
