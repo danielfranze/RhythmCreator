@@ -4,7 +4,7 @@ var path = require('path');
 
 // define consts
 const SOURCE_DIR = path.resolve(__dirname, './src/');
-const BUILD_DIR = path.resolve(__dirname, 'build/');
+const BUILD_DIR = path.resolve(__dirname, 'build/public');
 const PORT_DEV_SERVER = 3434;
 
 // config and build process
@@ -13,7 +13,7 @@ var config = {
     entry: ['webpack-dev-server/client?http://localhost:' + PORT_DEV_SERVER, SOURCE_DIR + '/index.js'],
     output: {
         path: BUILD_DIR,
-        //publicPath: 'public/',
+        publicPath: 'public/',
         filename: "bundle.js"
     },
     // set dev-server configuration
