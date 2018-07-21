@@ -8,15 +8,36 @@ $darkgrey: #686868;
 /***********************************
  *           ControlArea 
  ***********************************/
+.ui.celled.grid > .row 
+    width: 100% !important
+    margin: 0
+    padding-top: 1em !important
+    padding-bottom: 1em !important
+    padding: 0
+    -webkit-box-shadow: 0 -1px 0 0 #d4d4d5
+    box-shadow: 0 -1px 0 0 #d4d4d5
 
+.ui.celled.grid 
+    width: 100%
+    margin: 1em 0
+    margin-right: 0px
+    margin-bottom: 1em
+    margin-left: 0px
+    margin-top: 0px !important
+    -webkit-box-shadow: 0 0 0 1px #d4d4d5
+    box-shadow: 0 0 0 1px #d4d4d5
 
-
-
+.ui.massive.menu 
+    font-size: 1.28571429rem
+    margin-bottom: 0px !important
 
 
 /***********************************
  *           MainMenu 
  ***********************************/
+
+.text
+  color: $darkgrey
 
 h1 
   font-size: 4.375em !important
@@ -36,6 +57,11 @@ h1
   background: 0 0 !important
   color: $darkgrey !important
 
+.ui.menu .item > i.icon
+    opacity: .9
+    float: none
+    margin: 0 .35714286em 0 0
+    text-align: right !important
 
 @media only screen and (max-width : 767px)
   #menu-item-center
@@ -72,15 +98,17 @@ h1
 i.icon.folder:before
   content: "\F07B"
   font-size: 2.7em !important
+  color: $darkgrey
 
 i.icon.file:before 
   content: "\F15B"
   font-size: 2.7em !important
+  color: $darkgrey
 
 i.icon.trash:before 
   content: "\F1F8"
   font-size: 2.7em !important
-
+  color: $darkgrey
 
 .ui.button > .icon:not(.button) 
   height: 1em !important
@@ -97,3 +125,21 @@ p
 .content
   font-size: 1.5em !important
   font-family: 'Roboto', sans-serif !important
+
+
+
+
+/***********************************
+ *           Global Settings
+ ***********************************/
+body 
+    margin: 0
+    padding: 0
+    overflow-x: hidden
+    min-width: 320px
+    background: $lightgrey !important
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif
+    font-size: 14px
+    line-height: 1.4285em
+    color: rgba(0, 0, 0, 0.87)
+

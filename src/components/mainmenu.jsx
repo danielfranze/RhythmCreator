@@ -22,7 +22,7 @@ export default class MainMenu extends Component {
 
 
     return (
-
+    
     <Menu borderless stackable inverted size='massive'>
     
       <Menu.Item  id="menu-item-left" position="left" className='link' href='https://github.com/danielfranze/RhythmCreator'>
@@ -34,14 +34,14 @@ export default class MainMenu extends Component {
           <span className='header_title_left'>Rhythm</span><span className='header_title_right'> creator</span> 
         </Header>
       </Menu.Item>
-
+      
       <Dropdown open={this.state.dropDownMenuOpen}  onClick={this.handleDownMenuOpenClose}
       size='massive' width="100px" position="right" icon='th huge' pointing='top right' className='link item'>
         <Dropdown.Menu >
           <Dropdown.Item icon='folder' text='Open'/>
           <Dropdown.Item icon='file' text='Save'/>
 
-            <Modal
+          <Modal
             dimmer="blurring"
             trigger={<Dropdown.Item icon='trash' text='Reset' onClick={this.handleModalOpen}></Dropdown.Item>}
             open={this.state.modalOpen}
@@ -49,7 +49,7 @@ export default class MainMenu extends Component {
             basic
             size='small'
           >
-            <Header size='huge' icon='question' content='Confirm Deletion' />
+            <Header size='huge' icon='warning sign' content='Confirm Deletion'/>
             <Modal.Content>
               <h3>
                   <p><Icon size='huge' name='angle double right'/>This will delete all of your inputs!</p> 
