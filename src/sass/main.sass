@@ -4,11 +4,19 @@ $lightgrey: #F2F2F2;
 $grey: #D3D3D3;
 $darkgrey: #686868;
 
+
 /***********************************
- *           MainManu 
+ *           ControlArea 
  ***********************************/
 
 
+
+
+
+
+/***********************************
+ *           MainManu 
+ ***********************************/
 
 h1 
   font-size: 4.375em !important
@@ -20,16 +28,13 @@ h1
   .header_title_right
     color: $lightgrey !important
 
-.text
-  font-family: 'Roboto', sans-serif !important
-
 .ui.inverted.menu
-    border: 0 solid transparent !important
-    background: $grey !important
+  border: 0 solid transparent !important
+  background: $grey !important
 
 .ui.inverted.menu .item, .ui.inverted.menu .item > a:not(.ui) 
-    background: 0 0 !important
-    color: $darkgrey !important
+  background: 0 0 !important
+  color: $darkgrey !important
 
 
 @media only screen and (max-width : 767px)
@@ -48,6 +53,38 @@ h1
     min-width: 150px !important
 
 
+
+/***********************************
+ *           MainManu Dropdown
+ ***********************************/
+
+.text
+  font-family: 'Roboto', sans-serif !important
+  font-size: 1.5em !important
+  margin-left: 40px !important
+
+.ui.menu .ui.dropdown.item .menu .item:not(.filtered)
+  display: block
+  font-size: 2rem !important
+  font-family: 'Roboto', sans-serif !important
+  font-weight: 700 !important
+  padding:  40px !important
+
+i.icon.folder:before
+  content: "\F07B"
+  font-size: 2.7em !important
+
+i.icon.file:before 
+  content: "\F15B"
+  font-size: 2.7em !important
+
+i.icon.trash:before 
+  content: "\F1F8"
+  font-size: 2.7em !important
+
+
+.ui.button > .icon:not(.button) 
+  height: 1em !important
 
 
 /***********************************
