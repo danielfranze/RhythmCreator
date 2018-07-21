@@ -4,11 +4,19 @@ import '../sass/main.sass';
 
 
 export default class MainMenu extends Component {
-  state = { modalOpen: false }
+  state = { modalOpen: false, dropDownMenuOpen: false}
 
-  handleOpen = () => this.setState({ modalOpen: true })
 
-  handleClose = () => this.setState({ modalOpen: false })
+  handleDownMenuClose = () => this.setState({ dropDownMenuOpen: false, modalOpen: false })
+  handleDownMenuOpenClose = () => {
+    if((this.state.dropDownMenuOpen) == !(this.state.modalOpen)){
+      this.setState({dropDownMenuOpen: false })
+    } else {
+      this.setState({dropDownMenuOpen: true })
+    }
+  }
+  handleModalOpen = () => this.setState({ modalOpen: true})
+  handleModalClose = () => this.setState({ modalOpen: false })
 
   render() {
 
@@ -27,34 +35,34 @@ export default class MainMenu extends Component {
         </Header>
       </Menu.Item>
 
-      <Dropdown  width="100px" position="right" icon='th huge' pointing='top right' className='link item'>
+      <Dropdown open={this.state.dropDownMenuOpen}  onClick={this.handleDownMenuOpenClose}
+      size='massive' width="100px" position="right" icon='th huge' pointing='top right' className='link item'>
         <Dropdown.Menu >
           <Dropdown.Item icon='folder' text='Open'/>
           <Dropdown.Item icon='file' text='Save'/>
 
-
             <Modal
             dimmer="blurring"
-            trigger={<Dropdown.Item icon='trash' text='Reset' onClick={this.handleOpen}></Dropdown.Item>}
+            trigger={<Dropdown.Item icon='trash' text='Reset' onClick={this.handleModalOpen}></Dropdown.Item>}
             open={this.state.modalOpen}
-            onClose={this.handleClose}
+            onClose={this.handleModalClose}
             basic
-            size='large'
+            size='small'
           >
             <Header size='huge' icon='question' content='Confirm Deletion' />
             <Modal.Content>
               <h3>
                   <p><Icon size='huge' name='angle double right'/>This will delete all of your inputs!</p> 
-                  <p><Icon size='huge' name='angle double right'/>Are you sure you want to permanently remove your inputs?</p>
+                  <p><Icon size='huge' name='angle double right'/>Are you sure you want to continue?</p>
               </h3>
             </Modal.Content>
             <Modal.Actions>
-            <Button size='huge' color='green' onClick={this.handleClose} inverted>
-                <Icon size='huge' name='checkmark' /> No
+            <Button size='huge' color='green' onClick={this.handleModalClose} inverted>
+                <Icon size='huge' name='checkmark' /> <p>No</p>
               </Button>
 
-              <Button size='huge' color='red' onClick={this.handleClose} inverted>
-                <Icon size='huge' name='delete' /> Delete
+              <Button size='huge' color='red' onClick={this.handleDownMenuClose} inverted>
+                <Icon size='huge' name='delete' /> <p>Delete</p>
               </Button>
             </Modal.Actions>
           </Modal>
