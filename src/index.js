@@ -1,19 +1,15 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import MainMenu from './components/mainmenu.jsx';
 import Workspace from './components/workspace.jsx';
 import ControlArea from './components/controlarea.jsx';
 
-import { Dimmer, Segment, Loader, Header,Icon, Button} from 'semantic-ui-react'
+import { Dimmer, Header,Icon} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
 import './sass/main.sass';
-//import * as semantic from 'semantic-ui-react';
-
-//import { Menu, Icon, Header, Dropdown, Modal, Button, Dimmer, Loader} from 'semantic-ui-css/semantic.min.css';
 
 
-class Index extends React.Component {
-    //state = {active:true}
+class Index extends Component {
 
     handleShow = () => this.setState({ active: true })
     handleHide = () => this.setState({ active: false })
@@ -22,7 +18,8 @@ class Index extends React.Component {
         super(props)
 
         this.state = {
-            active: true
+            active: true,
+            
         }
 
         setTimeout(() =>{
@@ -33,39 +30,26 @@ class Index extends React.Component {
 
     exitWithoutDimmer(){
         const { active } = this.state
-
-        const content = (
+        const getComponentsFromComponentsListProps = (
             <div>
-              <Header as='h2' inverted>
-                Title
-              </Header>
-      
-              <Button primary>Add</Button>
-              <Button>View</Button>
+                {this.props.componentsList.map(function(listValue, i){
+                    return <div key={i}>{listValue}</div>;
+                })}
             </div>
-          )
+        )
 
         if(this.state.active == true){
             return(
-            <Dimmer.Dimmable   blurring dimmed={active} onClick={this.handleHide} 
-            
-            dimmer={{active, content }}
-            >
+            <Dimmer.Dimmable   blurring dimmed={active} onClick={this.handleHide} dimmer={{active}} >
 
-                <MainMenu />
-                <Workspace />
-                <ControlArea />
+                {getComponentsFromComponentsListProps}
+
                 <Dimmer active={active} inverted page>
-                <Icon name="warning sign" size="massive" /><Header size='huge' content='WORK IN PROGRESS'/>
-          </Dimmer>
+                    <Icon name="warning sign" size="massive" /><Header size='huge' content='WORK IN PROGRESS'/>
+                </Dimmer>
             </Dimmer.Dimmable>)
         } else {
-            return(
-            <div>
-                <MainMenu />
-                <Workspace />
-                <ControlArea />
-            </div>)
+            return(<div>{getComponentsFromComponentsListProps}</div>)
         }
     }
     render(){
@@ -78,4 +62,5 @@ class Index extends React.Component {
     }
 }
 
-ReactDOM.render(<Index />, document.getElementById('root'));
+
+ReactDOM.render(<Index componentsList={[<MainMenu />,<Workspace />,<ControlArea />]}/>, document.getElementById('root'));
