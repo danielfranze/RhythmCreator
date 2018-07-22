@@ -8,6 +8,13 @@ $darkgrey: #686868;
 /***********************************
  *           ControlArea 
  ***********************************/
+
+.ui.inverted.dimmer 
+    background-color: rgba(0, 0, 0, 0.6) !important
+
+.dimmed.dimmable > .ui.animating.dimmer, .dimmed.dimmable > .ui.visible.dimmer, .ui.active.dimmer 
+    opacity: 1 !important
+
 .ui.celled.grid > .row 
     width: 100% !important
     margin: 0
@@ -82,6 +89,13 @@ h1
 /***********************************
  *           MainManu Dropdown
  ***********************************/
+.ui.top.right.pointing.dropdown > .menu
+    top: 100%
+    bottom: auto
+    right: 0
+    left: auto
+    margin: 1em 0 0
+    z-index: 9000 !important
 
 .ui.menu .ui.dropdown.item .menu .item:not(.filtered) .text
   font-family: 'Roboto', sans-serif !important
@@ -121,6 +135,7 @@ i.icon.trash:before
 p 
   font-size: 1.5em !important
   font-family: 'Roboto', sans-serif !important
+  font-weight: 700 !important
 
 .content
   font-size: 1.5em !important

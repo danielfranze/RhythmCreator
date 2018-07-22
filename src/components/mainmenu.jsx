@@ -35,7 +35,7 @@ export default class MainMenu extends Component {
         </Header>
       </Menu.Item>
       
-      <Dropdown open={this.state.dropDownMenuOpen}  onClick={this.handleDownMenuOpenClose}
+      <Dropdown open={this.state.dropDownMenuOpen}  onClick={this.handleDownMenuOpenClose }
       size='massive' width="100px" position="right" icon='th huge' pointing='top right' className='link item'>
         <Dropdown.Menu >
           <Dropdown.Item icon='folder' text='Open'/>
@@ -51,10 +51,10 @@ export default class MainMenu extends Component {
           >
             <Header size='huge' icon='warning sign' content='Confirm Deletion'/>
             <Modal.Content>
-              <h3>
-                  <p><Icon size='huge' name='angle double right'/>This will delete all of your inputs!</p> 
-                  <p><Icon size='huge' name='angle double right'/>Are you sure you want to continue?</p>
-              </h3>
+              
+              <p><Icon size='huge' name='angle double right'/>This will delete all of your inputs!</p> 
+              <p><Icon size='huge' name='angle double right'/>Are you sure you want to continue?</p>
+              
             </Modal.Content>
             <Modal.Actions>
             <Button size='huge' color='green' onClick={this.handleModalClose} inverted>

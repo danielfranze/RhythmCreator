@@ -18,11 +18,11 @@ export default class Workspace extends Component {
 
         setTimeout(() =>{
             this.setState({visible: true});
-        }, 700)
+        }, 0)
         setTimeout(() =>{
             this.setState({visibleLeft: true});
             this.setState({visibleRight: true});
-        }, 1700)
+        }, 0)
     }
 
     toggleVisibility = () => this.setState({ visible: !this.state.visible })
@@ -51,7 +51,7 @@ export default class Workspace extends Component {
         const columns = _.times(5, i => (
         <Grid.Row key={i}>
             <Grid.Column width={1}  textAlign="right" >
-                <Transition visible={visibleRight} animation='jiggle' duration={2000}>
+                <Transition visible={visibleRight} animation='jiggle' duration={1000}>
                     <Icon name="volume up" size={this.state.iconSize} onClick={this.toggleVisibility} style={{color:this.state.iconColor}}></Icon>
                 </Transition>
             </Grid.Column>
@@ -61,7 +61,7 @@ export default class Workspace extends Component {
             </Grid.Column>
 
             <Grid.Column width={1}>
-                <Transition visible={visibleLeft} animation='jiggle' duration={2000}>
+                <Transition visible={visibleLeft} animation='jiggle' duration={1000}>
                     <Icon name="ellipsis vertical" size={this.state.iconSize} style={{color:this.state.iconColor}}></Icon>
                 </Transition>
             </Grid.Column>
