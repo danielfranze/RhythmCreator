@@ -4,7 +4,7 @@ import MainMenu from './components/mainmenu.jsx';
 import Workspace from './components/workspace.jsx';
 import ControlArea from './components/controlarea.jsx';
 
-import { Dimmer, Header,Icon} from 'semantic-ui-react'
+import { Dimmer, Loader} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
 import './sass/main.sass';
 
@@ -19,7 +19,6 @@ class Index extends Component {
 
         this.state = {
             active: true,
-            
         }
 
         setTimeout(() =>{
@@ -44,8 +43,8 @@ class Index extends Component {
 
                 {getComponentsFromComponentsListProps}
 
-                <Dimmer active={active} inverted page>
-                    <Icon name="warning sign" size="massive" /><Header size='huge' content='WORK IN PROGRESS'/>
+                <Dimmer active={active}  page>
+                    <Loader size="massive">Loading</Loader>
                 </Dimmer>
             </Dimmer.Dimmable>)
         } else {
