@@ -6,13 +6,25 @@ import '../sass/main.sass';
 
 
 export default class MainMenu extends Component {
-  state = { modalOpen: false, dropDownMenuOpen: false}
+  state = { 
+    modalOpen: false, 
+    dropDownMenuOpen: false,
+    playButtonActive: true,
+    playButtonName: "pause circle"
+  }
+
   constructor(props){
     super(props)
 
 
 }
 
+  handlePressButton = () => {
+    this.state.playButtonActive ? 
+    this.setState({playButtonActive: false, playButtonName: "play circle" }) : 
+    this.setState({playButtonActive: true, playButtonName: "pause circle" })
+
+  }
   handleDownMenuClose = () => this.setState({ dropDownMenuOpen: false, modalOpen: false })
   handleDownMenuOpenClose = () => {
     if((this.state.dropDownMenuOpen) == !(this.state.modalOpen)){
@@ -39,7 +51,9 @@ export default class MainMenu extends Component {
       ***********************************/}
       <Menu.Item id="menu-item-center">
         <Header as='h1' underline='false'>
-          <span className='header_title_left'>Rhythm</span><span className='header_title_right'> creator</span> 
+          <span className='header_title_left'>Rhythm</span> <span>
+            <Icon name={this.state.playButtonName} onClick={this.handlePressButton} link></Icon>
+          </span><span className='header_title_right'> creator</span> 
         </Header>
       </Menu.Item>
       {/***********************************
@@ -84,7 +98,7 @@ export default class MainMenu extends Component {
     </Menu>
     )
 
-    return (<div>{menuContainer}<Workspace showPlayobjectProp={this.props.showPlayobjectProp}/></div>
+    return (<div>{menuContainer}<Workspace showPlayobjectProp={this.props.showPlayobjectProp && this.state.playButtonActive}/></div>
     
 
 

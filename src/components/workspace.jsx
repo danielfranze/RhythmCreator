@@ -15,7 +15,7 @@ export default class Workspace extends Component {
             iconSize: 'huge',
             iconColor: '#D3D3D3',
             animationName: 'jiggle',
-            animationDuration: 1000,
+            animationDuration: 2000,
             numerOfrows: 5,
             numberOfColumns: 16
         }
@@ -44,7 +44,7 @@ export default class Workspace extends Component {
         const columns = _.times(this.state.numerOfrows, row => (
         <Grid.Row key={row}>
             <Grid.Column width={1}  textAlign="right" >
-                <Transition visible={visibleRight} animation={this.state.animationName} duration={this.state.durationAnimation}>
+                <Transition visible={visibleRight} animation={this.state.animationName} duration={this.state.animationDuration}>
                     <Icon name="volume up" size={this.state.iconSize} onClick={this.toggleVisibility} style={{color:this.state.iconColor}}></Icon>
                 </Transition>
             </Grid.Column>
@@ -54,7 +54,7 @@ export default class Workspace extends Component {
                     <Grid.Row>{
                         _.times(this.state.numberOfColumns, column => (
                             <Grid.Column key={column}> 
-                                <Transition visible={visible} animation={this.state.animationName} duration={this.state.durationAnimation}>
+                                <Transition visible={visible} animation={this.state.animationName} duration={this.state.animationDuration}>
                                     <Icon id={row.toString() + column.toString()} name="circle" size={this.state.iconSize} style={{color:this.state.iconColor}}/>  
                                 </Transition>
                             </Grid.Column>
@@ -65,7 +65,7 @@ export default class Workspace extends Component {
             </Grid.Column>
 
             <Grid.Column width={1}>
-                <Transition visible={visibleLeft} animation={this.state.animationName} duration={this.state.durationAnimation}>
+                <Transition visible={visibleLeft} animation={this.state.animationName} duration={this.state.animationDuration}>
                     <Icon name="ellipsis vertical" size={this.state.iconSize} style={{color:this.state.iconColor}}></Icon>
                 </Transition>
             </Grid.Column>
