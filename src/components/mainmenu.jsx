@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
 import { Menu, Icon, Header, Dropdown, Modal, Button} from 'semantic-ui-react'
+
+import Workspace from './workspace.jsx';
 import '../sass/main.sass';
 
 
 export default class MainMenu extends Component {
   state = { modalOpen: false, dropDownMenuOpen: false}
+  constructor(props){
+    super(props)
 
+
+}
 
   handleDownMenuClose = () => this.setState({ dropDownMenuOpen: false, modalOpen: false })
   handleDownMenuOpenClose = () => {
@@ -20,21 +26,25 @@ export default class MainMenu extends Component {
 
   render() {
 
-
-    return (
-    
-    <Menu borderless stackable inverted size='massive'>
-    
+    const menuContainer = (
+      <Menu borderless stackable inverted size='massive'>
+      {/***********************************
+        *           Github Icon           *
+        ***********************************/}
       <Menu.Item  id="menu-item-left" position="left" className='link' href='https://github.com/danielfranze/RhythmCreator'>
           <Icon disabled={this.state.disabled} name='github' size='huge'></Icon>
       </Menu.Item>
-
+      {/***********************************
+      *               Title               *
+      ***********************************/}
       <Menu.Item id="menu-item-center">
         <Header as='h1' underline='false'>
           <span className='header_title_left'>Rhythm</span><span className='header_title_right'> creator</span> 
         </Header>
       </Menu.Item>
-      
+      {/***********************************
+        *             Dropdown            *
+        ***********************************/}
       <Dropdown open={this.state.dropDownMenuOpen}  onClick={this.handleDownMenuOpenClose }
       size='massive' width="100px" position="right" icon='th huge' pointing='top right' className='link item'>
         <Dropdown.Menu >
@@ -72,6 +82,11 @@ export default class MainMenu extends Component {
       </Dropdown>
 
     </Menu>
+    )
+
+    return (<div>{menuContainer}<Workspace showPlayobjectProp={this.props.showPlayobjectProp}/></div>
+    
+
 
     )
   }

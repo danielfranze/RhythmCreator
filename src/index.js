@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import MainMenu from './components/mainmenu.jsx';
-import Workspace from './components/workspace.jsx';
-import ControlArea from './components/controlarea.jsx';
+//import Workspace from './components/workspace.jsx';
+//import ControlArea from './components/controlarea.jsx';
 
 import { Dimmer, Loader} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
@@ -39,16 +39,20 @@ class Index extends Component {
 
         if(this.state.active == true){
             return(
-            <Dimmer.Dimmable   blurring dimmed={active} onClick={this.handleHide} dimmer={{active}} >
+            <Dimmer.Dimmable blurring dimmed={active} onClick={this.handleHide} dimmer={{active}} >
 
-                {getComponentsFromComponentsListProps}
+                {/*{getComponentsFromComponentsListProps}*/}
+                <MainMenu showPlayobjectProp={false}/>
 
                 <Dimmer active={active}  page>
                     <Loader size="massive">Loading</Loader>
                 </Dimmer>
             </Dimmer.Dimmable>)
         } else {
-            return(<div>{getComponentsFromComponentsListProps}</div>)
+            return(
+                /*<div>{getComponentsFromComponentsListProps}</div>*/
+                <div><MainMenu showPlayobjectProp={true}/></div>
+            )
         }
     }
     render(){
@@ -62,4 +66,4 @@ class Index extends Component {
 }
 
 
-ReactDOM.render(<Index componentsList={[<MainMenu />,<Workspace />,<ControlArea />]}/>, document.getElementById('root'));
+ReactDOM.render(<Index componentsList={[<MainMenu />]}/>, document.getElementById('root'));

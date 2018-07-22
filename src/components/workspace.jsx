@@ -13,7 +13,11 @@ export default class Workspace extends Component {
             visibleLeft: false,
             visibleRight: false,
             iconSize: 'huge',
-            iconColor: '#D3D3D3'
+            iconColor: '#D3D3D3',
+            animationName: 'jiggle',
+            animationDuration: 1000,
+            numerOfrows: 5,
+            numberOfColumns: 16
         }
 
         setTimeout(() =>{
@@ -36,43 +40,49 @@ export default class Workspace extends Component {
     render(){
         const { visible, visibleLeft, visibleRight  } = this.state
 
-        const toneFields = _.times(16, i => (
-            //this.test.bind(i)
-            //this.initColumns(i)
 
-            <Grid.Column key={i}> 
-                <Transition visible={visible} animation='jiggle' duration={1000}>
-                    <Icon name="circle" size={this.state.iconSize} style={{color:this.state.iconColor}}/>  
-                </Transition>
-            </Grid.Column>
-
-          ))
-
-        const columns = _.times(5, i => (
-        <Grid.Row key={i}>
+        const columns = _.times(this.state.numerOfrows, row => (
+        <Grid.Row key={row}>
             <Grid.Column width={1}  textAlign="right" >
-                <Transition visible={visibleRight} animation='jiggle' duration={1000}>
+                <Transition visible={visibleRight} animation={this.state.animationName} duration={this.state.durationAnimation}>
                     <Icon name="volume up" size={this.state.iconSize} onClick={this.toggleVisibility} style={{color:this.state.iconColor}}></Icon>
                 </Transition>
             </Grid.Column>
 
             <Grid.Column width={14}>
-                <Grid textAlign='center'><Grid.Row>{toneFields}</Grid.Row></Grid>
+                <Grid textAlign='center'>
+                    <Grid.Row>{
+                        _.times(this.state.numberOfColumns, column => (
+                            <Grid.Column key={column}> 
+                                <Transition visible={visible} animation={this.state.animationName} duration={this.state.durationAnimation}>
+                                    <Icon id={row.toString() + column.toString()} name="circle" size={this.state.iconSize} style={{color:this.state.iconColor}}/>  
+                                </Transition>
+                            </Grid.Column>
+                          ))
+                    }
+                    </Grid.Row>
+                </Grid>
             </Grid.Column>
 
             <Grid.Column width={1}>
-                <Transition visible={visibleLeft} animation='jiggle' duration={1000}>
+                <Transition visible={visibleLeft} animation={this.state.animationName} duration={this.state.durationAnimation}>
                     <Icon name="ellipsis vertical" size={this.state.iconSize} style={{color:this.state.iconColor}}></Icon>
                 </Transition>
             </Grid.Column>
         </Grid.Row>
         ))
         //const columns = _.times(16, i => (
-        //    <Icon name="circle" key={i} style={{position:"relative"}} size="large"/>))
+        //    <Icon name="circle" key={i} style={{position:"relative"}} size="large"/>))   style={{display: "none"}}
         
         
         const result = (
-            <Grid celled>{columns}</Grid>
+            <Grid celled>
+            
+            
+
+                {this.props.showPlayobjectProp ? (<div className="playobject" ></div>) : (<div></div>)}
+                {columns}
+            </Grid>
         )
 
         return  (result)
