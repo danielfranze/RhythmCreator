@@ -5,7 +5,38 @@ $grey: #D3D3D3;
 $darkgrey: #686868;
 
 
+/***********************************
+ *       Workspace Tone Lines 
+ ***********************************/
+.toneLineOne::before 
+    display: block
+    content: ' '
+    background: $grey
+    width: 6px
+    height: 60%
+    top: -70px !important
+    position: absolute
+    top: 0
+    left: 50px !important
+    margin-left: -3px
+    z-index: 0
 
+.toneLineOne
+  position: absolute
+  top: 0px
+  left: 0%
+  bottom: 0
+  padding: 0 !important
+  width: 3px !important
+  height: 200px
+  border-radius: 0px
+  //margin-right: 1.5em
+  //margin-left: 100px
+  //background: $grey
+  pointer-events: none
+  z-index: 2
+
+  
 /***********************************
  *       Workspace Animation 
  ***********************************/
@@ -23,7 +54,7 @@ $darkgrey: #686868;
   top: 125px
   background: rgba(0,0,0,0.2)
   pointer-events: none
-  z-index: 2
+  z-index: 3
 
 @keyframes MoveUpDown 
   0%, 100%
@@ -79,17 +110,20 @@ h1
 .ui.inverted.menu
   border: 0 solid transparent !important
   background: $grey !important
+  z-index: 10 !important
 
 .ui.inverted.menu .item, .ui.inverted.menu .item > a:not(.ui) 
   background: 0 0 !important
   color: $darkgrey !important
+  z-index: 10 !important
 
 .ui.menu .item > i.icon
     opacity: .9
     float: none
     margin: 0 .35714286em 0 0
     text-align: right !important
-
+    z-index: 10 !important
+    
 @media only screen and (max-width : 767px)
   #menu-item-center
     display: none

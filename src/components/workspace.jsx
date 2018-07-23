@@ -15,21 +15,25 @@ export default class Workspace extends Component {
             iconSize: 'huge',
             iconColor: '#D3D3D3',
             animationName: 'jiggle',
-            animationDuration: 2000,
+            animationDuration: 1800,
             numerOfrows: 5,
-            numberOfColumns: 16
+            numberOfColumns: 16,
+            displayToneLines: false
         }
+        setTimeout(() =>{
+            this.setState({displayToneLines: true});
+        }, (this.state.animationDuration + 400))
 
         setTimeout(() =>{
             this.setState({visible: true});
         }, 0)
         setTimeout(() =>{
-            this.setState({visibleLeft: true});
-            this.setState({visibleRight: true});
+            this.setState({visibleLeft: true, visibleRight: true});
+            //this.setState({visibleRight: true});
         }, 0)
     }
 
-    toggleVisibility = () => this.setState({ visible: !this.state.visible })
+    toggleVisibility = () => this.setState({ displayToneLines:false, visible: !this.state.visible })
     
     componentDidMount() {
         this.toggleVisibility
@@ -38,24 +42,40 @@ export default class Workspace extends Component {
 
 
     render(){
-        const { visible, visibleLeft, visibleRight  } = this.state
+        const { numberOfColumns,
+                numerOfrows,
+                visible, 
+                visibleLeft, 
+                visibleRight, 
+                animationName,
+                animationDuration,
+                iconSize,
+                iconColor,
+                displayToneLines
+        } = this.state
 
 
-        const columns = _.times(this.state.numerOfrows, row => (
+        const grid = _.times(numerOfrows, row => (
         <Grid.Row key={row}>
+
             <Grid.Column width={1}  textAlign="right" >
-                <Transition visible={visibleRight} animation={this.state.animationName} duration={this.state.animationDuration}>
-                    <Icon name="volume up" size={this.state.iconSize} onClick={this.toggleVisibility} style={{color:this.state.iconColor}}></Icon>
+                <Transition visible={visibleLeft} animation={animationName} duration={animationDuration}>
+                    <Icon name="volume up" size={iconSize} onClick={this.toggleVisibility} style={{color:iconColor}}></Icon>
                 </Transition>
             </Grid.Column>
 
             <Grid.Column width={14}>
                 <Grid textAlign='center'>
+                
                     <Grid.Row>{
-                        _.times(this.state.numberOfColumns, column => (
+                        _.times(numberOfColumns, column => (
                             <Grid.Column key={column}> 
-                                <Transition visible={visible} animation={this.state.animationName} duration={this.state.animationDuration}>
-                                    <Icon id={row.toString() + column.toString()} name="circle" size={this.state.iconSize} style={{color:this.state.iconColor}}/>  
+                                <Transition visible={visible} animation={animationName} duration={animationDuration}>
+                                    <Icon id={row.toString() + column.toString()} name="circle" size={iconSize} style={{color:iconColor}}>
+                                        <Transition visible={displayToneLines} animation="fade" duration="8000">
+                                            <span className="toneLineOne"></span>
+                                        </Transition> 
+                                    </Icon>
                                 </Transition>
                             </Grid.Column>
                           ))
@@ -65,8 +85,8 @@ export default class Workspace extends Component {
             </Grid.Column>
 
             <Grid.Column width={1}>
-                <Transition visible={visibleLeft} animation={this.state.animationName} duration={this.state.animationDuration}>
-                    <Icon name="ellipsis vertical" size={this.state.iconSize} style={{color:this.state.iconColor}}></Icon>
+                <Transition visible={visibleRight} animation={animationName} duration={animationDuration}>
+                    <Icon name="ellipsis vertical" size={iconSize} style={{color:iconColor}}></Icon>
                 </Transition>
             </Grid.Column>
         </Grid.Row>
@@ -77,11 +97,8 @@ export default class Workspace extends Component {
         
         const result = (
             <Grid celled>
-            
-            
-
                 {this.props.showPlayobjectProp ? (<div className="playobject" ></div>) : (<div></div>)}
-                {columns}
+                {grid}
             </Grid>
         )
 

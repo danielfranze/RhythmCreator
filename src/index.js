@@ -23,7 +23,7 @@ class Index extends Component {
 
         setTimeout(() =>{
             this.setState({active: false});
-        }, 2500)
+        }, 2000)
 
     }
 

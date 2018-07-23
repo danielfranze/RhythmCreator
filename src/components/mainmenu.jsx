@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Menu, Icon, Header, Dropdown, Modal, Button} from 'semantic-ui-react'
 
 import Workspace from './workspace.jsx';
-import '../sass/main.sass';
+//import '../sass/main.sass';
 
 
 export default class MainMenu extends Component {
@@ -98,7 +98,10 @@ export default class MainMenu extends Component {
     </Menu>
     )
 
-    return (<div>{menuContainer}<Workspace showPlayobjectProp={this.props.showPlayobjectProp && this.state.playButtonActive}/></div>
+    return (<div>
+              {menuContainer}
+              <Workspace showPlayobjectProp={this.props.showPlayobjectProp && this.state.playButtonActive}/>
+            </div>
     
 
 
