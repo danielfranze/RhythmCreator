@@ -19,6 +19,8 @@ export default class Workspace extends Component {
             numerOfrows: 5,
             numberOfColumns: 16,
             displayToneLines: false,
+            showToneLineAnimationHide: 0,
+            showToneLineAnimationShow: 2000
 
         }
 
@@ -26,8 +28,10 @@ export default class Workspace extends Component {
             setTimeout(() =>{
                 this.setState({displayToneLines: true});
             }, (this.state.animationDuration + 400))
+            setTimeout(() =>{
+                this.setState({showToneLineAnimationShow: 0 });
+            }, this.state.showToneLineAnimationShow + 2000 )
         }
-
         setTimeout(() =>{
             this.setState({visible: true});
         }, 0)
@@ -38,17 +42,22 @@ export default class Workspace extends Component {
     }
 
     toggleVisibility = () => this.setState({visible: !this.state.visible })
+    //setAnimation = () =>  this.setState({showToneLineAnimationShow: 0})
     componentDidMount() {
-        this.toggleVisibility
+        //this.toggleVisibility
       }
 
     helperShowToneLine(row){
             if(row == 0){
-                return(<Transition visible={false} animation="fade" duration={"0"}>
+                return(<Transition visible={false} animation="fade" 
+                duration={{hide:this.state.showToneLineAnimationHide,
+                show:this.state.showToneLineAnimationShow}}>
                         <span className="toneLineOne"></span>
                       </Transition>)
             } else {
-                return (<Transition visible={this.state.displayToneLines} animation="fade" duration={"0"}>
+                return (<Transition visible={this.state.displayToneLines} animation="fade" 
+                duration={{hide:this.state.showToneLineAnimationHide,
+                show:this.state.showToneLineAnimationShow}}>
                             <span className="toneLineOne"></span>
                         </Transition>)
             }
@@ -57,17 +66,17 @@ export default class Workspace extends Component {
     }
     showToneLine(column, row){
 
-        var hide = 0
-        var show = 0
-
-        
         var element =  (this.helperShowToneLine(row))
 
-        var elementInvis =  (<Transition visible={false} animation="fade" duration={{hide,show}}>
-                            <span className="toneLineOne"></span>
-                        </Transition>)
+        var elementInvis =  (<Transition visible={false} animation="fade" 
+                                duration={{hide:this.state.showToneLineAnimationHide,
+                                show:this.state.showToneLineAnimationShow}}>
+                                <span className="toneLineOne"></span>
+                            </Transition>)
         return (
-            (((column + this.props.CurrentRangeToneLines) % this.props.CurrentRangeToneLines) == 0)  ?  element : elementInvis
+            (((column + this.props.CurrentRangeToneLines) % 
+            this.props.CurrentRangeToneLines) == 0)  ?  
+            element : elementInvis
         )
     }
 
@@ -90,7 +99,9 @@ export default class Workspace extends Component {
             *             Tone Name             *
             ***********************************/}
             <Grid.Column width={1}  textAlign="right" >
-                <Transition visible={visibleLeft} animation={animationName} duration={animationDuration}>
+                <Transition visible={visibleLeft} 
+                            animation={animationName} 
+                            duration={animationDuration}>
                     <Icon name="volume up" size={iconSize} onClick={this.toggleVisibility} style={{color:iconColor}}></Icon>
                 </Transition>
             </Grid.Column>
@@ -107,10 +118,12 @@ export default class Workspace extends Component {
                                     <Icon id={row.toString() + column.toString()} name="circle" size={iconSize} style={{color:iconColor}}>
 
                                         {/*this.setState({rangeToneLines: this.props.CurrentRangeToneLines})*/}
-                                       {this.showToneLine(column, row)}
+                                       
 
                                     </Icon>
+                                    
                                 </Transition>
+                                {this.showToneLine(column, row)}
                             </Grid.Column>
                           ))
                     }

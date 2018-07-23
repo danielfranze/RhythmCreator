@@ -79,7 +79,7 @@ export default class MainMenu extends Component {
         *             Dropdown            *
         ***********************************/}
       <Dropdown open={this.state.dropDownMenuOpen}  onClick={this.handleDownMenuOpenClose }
-      size='massive' width="100px" position="right" icon='th huge' pointing='top right' className='link item'>
+      size='massive' width="100px" position="right" icon='th' pointing='top right' className='link item'>
         <Dropdown.Menu >
           <Dropdown.Item icon='folder' text='Open'/>
           <Dropdown.Item icon='file' text='Save'/>
@@ -135,7 +135,7 @@ export default class MainMenu extends Component {
                   <Segment>
                   <h2>Line spacing {this.state.CurrentRangeToneLines}</h2>
 
-                      <Slider color="grey" inverted={false} 
+                      <Slider size="massive" color="grey" inverted={false} 
                         settings={{
                         start: this.state.CurrentRangeToneLines,
                         min:0,
