@@ -42,7 +42,7 @@ class Index extends Component {
             <Dimmer.Dimmable blurring dimmed={active} onClick={this.handleHide} dimmer={{active}} >
 
                 {/*{getComponentsFromComponentsListProps}*/}
-                <MainMenu showPlayobjectProp={false}/>
+                <MainMenu showPlayobjectProp={false} round={"first_round"}/>
 
                 <Dimmer active={active}  page>
                     <Loader size="massive">Loading</Loader>
@@ -51,7 +51,7 @@ class Index extends Component {
         } else {
             return(
                 /*<div>{getComponentsFromComponentsListProps}</div>*/
-                <div><MainMenu showPlayobjectProp={true}/></div>
+                <div><MainMenu showPlayobjectProp={true}  round={"secound_round"}/></div>
             )
         }
     }

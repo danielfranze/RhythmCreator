@@ -5,6 +5,14 @@ $grey: #D3D3D3;
 $darkgrey: #686868;
 
 
+
+/***********************************
+ *       Settings 
+ ***********************************/
+.ui.segment:last-child
+    margin-bottom: 0
+    background-color: $lightgrey !important
+
 /***********************************
  *       Workspace Tone Lines 
  ***********************************/
@@ -36,7 +44,7 @@ $darkgrey: #686868;
   pointer-events: none
   z-index: 2
 
-  
+
 /***********************************
  *       Workspace Animation 
  ***********************************/
@@ -96,16 +104,10 @@ $darkgrey: #686868;
  ***********************************/
 .text
   color: $darkgrey
-
-h1 
-  font-size: 4.375em !important
-  font-family: 'Roboto', sans-serif !important
-
-  .header_title_left
-    color: $darkgrey !important
-  
-  .header_title_right
-    color: $lightgrey !important
+.header_title_left
+  color: $darkgrey !important
+.header_title_right
+  color: $lightgrey !important
 
 .ui.inverted.menu
   border: 0 solid transparent !important
@@ -162,6 +164,17 @@ h1
   font-family: 'Roboto', sans-serif !important
   font-weight: 700 !important
   padding:  40px !important
+
+
+i.icon.sign.out:before 
+  content: "\F2F5"
+  font-size: 2.7em !important
+  color: $darkgrey
+
+i.icon.setting:before 
+  content: "\F013"
+  font-size: 2.7em !important
+  color: $darkgrey
 
 i.icon.folder:before
   content: "\F07B"
@@ -238,6 +251,16 @@ p
 /***********************************
  *          Global Settings
  ***********************************/
+h1 
+  font-size: 4.375em !important
+  font-family: 'Roboto', sans-serif !important
+  color: $darkgrey
+
+h2 
+  font-size: 4.375em !important
+  font-family: 'Roboto', sans-serif !important
+  color: $darkgrey
+
 body 
     margin: 0
     padding: 0

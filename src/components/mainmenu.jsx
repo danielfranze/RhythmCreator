@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import { Menu, Icon, Header, Dropdown, Modal, Button} from 'semantic-ui-react'
+import { Menu, Icon, Header, Dropdown, Modal, Button, Transition} from 'semantic-ui-react'
 
 import Workspace from './workspace.jsx';
+
+import { Slider } from 'react-semantic-ui-range'
+import {Segment,Grid,Label,Input} from 'semantic-ui-react';
 //import '../sass/main.sass';
 
 
@@ -10,7 +13,11 @@ export default class MainMenu extends Component {
     modalOpen: false, 
     dropDownMenuOpen: false,
     playButtonActive: true,
-    playButtonName: "pause circle"
+    playButtonName: "pause circle",
+    CurrentRangeToneLines: 4,
+    showSettings: false,
+    settingsButton: "setting",
+    settingsText: "Settings"
   }
 
   constructor(props){
@@ -18,6 +25,18 @@ export default class MainMenu extends Component {
 
 
 }
+
+  handleClickSettingsButton =  () => {
+    this.state.showSettings ? 
+    this.setState({showSettings: false, settingsButton: "setting", settingsText: "Settings" }) : 
+    this.setState({showSettings: true, settingsButton: "sign out alternate" , settingsText: "Exit Settings"})
+
+  }
+
+  handleCurrentRangeToneLines = (value) => {
+    this.setState({CurrentRangeToneLines:value})
+    //console.log("current Value!!! = " + this.state.CurrentRangeToneLines.toString())
+  }
 
   handlePressButton = () => {
     this.state.playButtonActive ? 
@@ -90,7 +109,7 @@ export default class MainMenu extends Component {
               </Button>
             </Modal.Actions>
           </Modal>
-
+          <Dropdown.Item icon={this.state.settingsButton} text={this.state.settingsText} onClick={this.handleClickSettingsButton}/>
 
         </Dropdown.Menu>
       </Dropdown>
@@ -100,7 +119,43 @@ export default class MainMenu extends Component {
 
     return (<div>
               {menuContainer}
-              <Workspace showPlayobjectProp={this.props.showPlayobjectProp && this.state.playButtonActive}/>
+              <Workspace  showPlayobjectProp={this.props.showPlayobjectProp && this.state.playButtonActive} 
+                          round={this.props.round}
+                          CurrentRangeToneLines={this.state.CurrentRangeToneLines}
+                          />
+
+
+              {/***********************************
+              *             Range Menu           *
+              ***********************************/}
+              <Transition visible={this.state.showSettings} animation="fade" duration={{hide:500,show: 2000}} >
+                <Grid>
+                <Grid.Column width={6}/>
+                <Grid.Column width={4}>
+                  <Segment>
+                  <h2>Line spacing {this.state.CurrentRangeToneLines}</h2>
+
+                      <Slider color="grey" inverted={false} 
+                        settings={{
+                        start: this.state.CurrentRangeToneLines,
+                        min:0,
+                        max:8,
+                        step:1,
+                        onChange: (value) => {
+                          this.setState({
+                            CurrentRangeToneLines:value
+                          })
+                          this.handleCurrentRangeToneLines(value)
+                        }
+                      }}/>
+
+                    
+                  </Segment>
+                </Grid.Column>
+                <Grid.Column width={6}/>
+
+                </Grid>
+              </Transition>
             </div>
     
 
