@@ -42,14 +42,27 @@ export default class Workspace extends Component {
         this.toggleVisibility
       }
 
-    showToneLine(column){
+    helperShowToneLine(row){
+            if(row == 0){
+                return(<Transition visible={false} animation="fade" duration={"0"}>
+                        <span className="toneLineOne"></span>
+                      </Transition>)
+            } else {
+                return (<Transition visible={this.state.displayToneLines} animation="fade" duration={"0"}>
+                            <span className="toneLineOne"></span>
+                        </Transition>)
+            }
+            
+
+    }
+    showToneLine(column, row){
 
         var hide = 0
         var show = 0
+
         
-        var element =  (<Transition visible={this.state.displayToneLines} animation="fade" duration={{hide,show}}>
-                            <span className="toneLineOne"></span>
-                        </Transition>)
+        var element =  (this.helperShowToneLine(row))
+
         var elementInvis =  (<Transition visible={false} animation="fade" duration={{hide,show}}>
                             <span className="toneLineOne"></span>
                         </Transition>)
@@ -94,7 +107,7 @@ export default class Workspace extends Component {
                                     <Icon id={row.toString() + column.toString()} name="circle" size={iconSize} style={{color:iconColor}}>
 
                                         {/*this.setState({rangeToneLines: this.props.CurrentRangeToneLines})*/}
-                                       {this.showToneLine(column)}
+                                       {this.showToneLine(column, row)}
 
                                     </Icon>
                                 </Transition>

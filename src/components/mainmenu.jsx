@@ -126,7 +126,7 @@ export default class MainMenu extends Component {
 
 
               {/***********************************
-              *             Range Menu           *
+              *             Settings Menu         *
               ***********************************/}
               <Transition visible={this.state.showSettings} animation="fade" duration={{hide:500,show: 2000}} >
                 <Grid>
