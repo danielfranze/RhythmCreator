@@ -1,10 +1,11 @@
 import _ from 'lodash'
 import React, { Component }from 'react'
 import { Grid, Icon, Transition} from 'semantic-ui-react'
+import StepSequencer from './stepSequencer.jsx';
 //import '../sass/main.sass';
 
 export default class Workspace extends Component {
-    state = { visible: false }
+    //state = { visible: false }
     constructor(props){
         super(props)
 
@@ -20,9 +21,15 @@ export default class Workspace extends Component {
             numberOfColumns: 16,
             displayToneLines: false,
             showToneLineAnimationHide: 0,
-            showToneLineAnimationShow: 2000
+            showToneLineAnimationShow: 2000,
+            stepSequencerMatrix: [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
 
         }
+        _.times(this.state.numberOfColumns, column  => (0))
 
         if(this.props.round == "secound_round"){
             setTimeout(() =>{
@@ -31,6 +38,21 @@ export default class Workspace extends Component {
             setTimeout(() =>{
                 this.setState({showToneLineAnimationShow: 0 });
             }, this.state.showToneLineAnimationShow + 2000 )
+
+            /*var arrayhelper = []
+            _.times(this.state.numerOfrows, row => {
+                arrayhelper.push([0])
+                _.times(this.state.numberOfColumns, column  => (
+                arrayhelper[row][column] = 0
+            ))})
+            for (var elements in this.state.stepSequencerMatrix){
+                _.times(this.state.numberOfColumns, column  => (
+                    elements.push(0)
+                ))
+            }*/
+            //console.log("stepSequencerMatrix: " +  this.state.stepSequencerMatrix[1])
+            //console.log("single stepSequencerMatrix: " +  this.state.stepSequencerMatrix[0][0])
+            
         }
         setTimeout(() =>{
             this.setState({visible: true});
@@ -41,13 +63,34 @@ export default class Workspace extends Component {
         }, 0)
     }
 
-    toggleVisibility = () => this.setState({visible: !this.state.visible })
+
+    setValueInStepSequencerMatrix = (row, column) =>{
+        var cache = this.state.stepSequencerMatrix
+        cache[row][column] = 1
+        this.setState({stepSequencerMatrix: cache });
+        console.log("Nein!!!!!!!!")
+    }
+
+    
+    setIconColor(row, column){
+        if(this.state.stepSequencerMatrix[row][column] == 0){
+            return("#D3D3D3")
+        } else {
+            return("red")
+        }
+
+    }
+
+    toggleVisibility = () => {
+        console.log("doch funktioniert!!!")
+        this.setState({visible: !this.state.visible })}
+
     //setAnimation = () =>  this.setState({showToneLineAnimationShow: 0})
     componentDidMount() {
         //this.toggleVisibility
       }
 
-    helperShowToneLine(row){
+    helperShowToneLine = (row) => {
             if(row == 0){
                 return(<Transition visible={false} animation="fade" 
                 duration={{hide:this.state.showToneLineAnimationHide,
@@ -93,6 +136,9 @@ export default class Workspace extends Component {
         } = this.state
 
 
+        
+
+
         const grid = _.times(numerOfrows, row => (
         <Grid.Row key={row}>
             {/***********************************
@@ -115,7 +161,12 @@ export default class Workspace extends Component {
                         _.times(numberOfColumns, column => (
                             <Grid.Column key={column}> 
                                 <Transition visible={visible} animation={animationName} duration={animationDuration}>
-                                    <Icon id={row.toString() + column.toString()} name="circle" size={iconSize} style={{color:iconColor}}>
+                                    <Icon   id={row.toString() + column.toString()} 
+                                            name="circle" 
+                                            size={iconSize} 
+                                            style={{color:this.setIconColor(row, column)}}
+                                            /*onClick={this.setValueInStepSequencerMatrix(row, column)}*/
+                                            onClick={() => this.setValueInStepSequencerMatrix(row, column)}   >
 
                                         {/*this.setState({rangeToneLines: this.props.CurrentRangeToneLines})*/}
                                        
@@ -123,6 +174,7 @@ export default class Workspace extends Component {
                                     </Icon>
                                     
                                 </Transition>
+                                {/*<Icon name="close" style={{position:"absolute", left: "0.32em", top: "0px"}} size={iconSize}></Icon>*/}
                                 {this.showToneLine(column, row)}
                             </Grid.Column>
                           ))
@@ -151,6 +203,6 @@ export default class Workspace extends Component {
             </Grid>
         )
 
-        return  (result)
+        return  (<div>{result}<StepSequencer/></div> )
     }
 }

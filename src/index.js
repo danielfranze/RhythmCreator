@@ -9,6 +9,7 @@ import 'semantic-ui-css/semantic.min.css';
 import './sass/main.sass';
 
 
+
 class Index extends Component {
 
     handleShow = () => this.setState({ active: true })
@@ -19,6 +20,7 @@ class Index extends Component {
 
         this.state = {
             active: true,
+            isFull: false
         }
 
         setTimeout(() =>{
@@ -26,20 +28,22 @@ class Index extends Component {
         }, 2000)
 
     }
-
+    goFull = () => {
+        this.setState({ isFull: true });
+      }
     exitWithoutDimmer(){
         const { active } = this.state
-        const getComponentsFromComponentsListProps = (
+        /*const getComponentsFromComponentsListProps = (
             <div>
                 {this.props.componentsList.map(function(listValue, i){
                     return <div key={i}>{listValue}</div>;
                 })}
             </div>
-        )
+        )*/
 
         if(this.state.active == true){
             return(
-            <Dimmer.Dimmable blurring dimmed={active} onClick={this.handleHide} dimmer={{active}} >
+            <Dimmer.Dimmable blurring dimmed={active} /*onClick={this.handleHide}*/ dimmer={{active}} >
 
                 {/*{getComponentsFromComponentsListProps}*/}
                 <MainMenu showPlayobjectProp={false} round={"first_round"}/>
@@ -59,11 +63,9 @@ class Index extends Component {
         
         return (
             this.exitWithoutDimmer()
-
-            
         );
     }
 }
 
 
-ReactDOM.render(<Index componentsList={[<MainMenu />]}/>, document.getElementById('root'));
+ReactDOM.render(<Index /*componentsList={[<MainMenu />]}*//>, document.getElementById('root'));

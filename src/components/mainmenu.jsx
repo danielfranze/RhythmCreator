@@ -135,7 +135,7 @@ export default class MainMenu extends Component {
                   <Segment>
                   <h2>Line spacing {this.state.CurrentRangeToneLines}</h2>
 
-                      <Slider size="massive" color="grey" inverted={false} 
+                      <Slider color="grey" inverted={false} 
                         settings={{
                         start: this.state.CurrentRangeToneLines,
                         min:0,
