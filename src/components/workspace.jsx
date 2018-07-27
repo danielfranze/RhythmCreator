@@ -24,6 +24,7 @@ export default class Workspace extends Component {
             showToneLineAnimationHide: 0,
             showToneLineAnimationShow: 2000, //mill secs
             stepSequencerMatrix: Array.from(Array(this.props.numerOfrows), () => Array(this.props.numberOfColumns).fill(0))
+            //bpm: this.props.bpm
 
         }
         //_.times(this.state.numberOfColumns, column  => (0))
@@ -179,7 +180,7 @@ export default class Workspace extends Component {
                                             size={iconSize} 
                                             style={{color:this.setIconColor(row, column)}}
                                             /*onClick={this.setValueInStepSequencerMatrix(row, column)}*/
-                                            onClick={() => this.setValueInStepSequencerMatrix(row, column)}   >
+                                            onClick={() => this.setValueInStepSequencerMatrix(row, column)}>
 
                                         {/*this.setState({rangeToneLines: this.props.CurrentRangeToneLines})*/}
                                        
@@ -220,6 +221,6 @@ export default class Workspace extends Component {
                                                 numerOfrows ={numerOfrows}
                                                 numberOfColumns={numberOfColumns}
                                                 stepSequencerMatrix={stepSequencerMatrix}
-                                                /></div> )
+                                                bpm={this.props.bpm}/></div> )
     }
 }

@@ -22,7 +22,8 @@ export default class MainMenu extends Component {
       CurrentRangeToneLines: 4,
       showSettings: false,
       settingsButton: "setting",
-      settingsText: "Settings"
+      settingsText: "Settings",
+      bpm: 120
     }
 
   }
@@ -133,6 +134,7 @@ export default class MainMenu extends Component {
                           CurrentRangeToneLines={this.state.CurrentRangeToneLines}
                           numerOfrows={5}
                           numberOfColumns={16}
+                          bpm={this.state.bpm}
                           ref={this.child}
                           />
 
@@ -142,7 +144,26 @@ export default class MainMenu extends Component {
               ***********************************/}
               <Transition visible={this.state.showSettings} animation="fade" duration={{hide:500,show: 2000}} >
                 <Grid>
-                <Grid.Column width={6}/>
+                <Grid.Column width={2}/>
+                <Grid.Column width={4}>
+                <Segment>
+                  <h2>BPM {this.state.bpm}</h2>
+
+                      <Slider color="grey" inverted={false} 
+                        settings={{
+                        start: this.state.bpm,
+                        min:0,
+                        max:200,
+                        step:1,
+                        onChange: (value) => {
+                          this.setState({
+                            bpm:value
+                          })
+                          //this.handleCurrentRangeToneLines(value)
+                        }
+                      }}/>
+                  </Segment>
+                </Grid.Column>
                 <Grid.Column width={4}>
                   <Segment>
                   <h2>Line spacing {this.state.CurrentRangeToneLines}</h2>
@@ -157,11 +178,9 @@ export default class MainMenu extends Component {
                           this.setState({
                             CurrentRangeToneLines:value
                           })
-                          this.handleCurrentRangeToneLines(value)
+                          //this.handleCurrentRangeToneLines(value)
                         }
                       }}/>
-
-                    
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width={6}/>
