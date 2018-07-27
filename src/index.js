@@ -6,7 +6,7 @@ import MainMenu from './components/mainmenu.jsx';
 
 import { Dimmer, Loader} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
-import './sass/main.sass';
+import './assets/css/main.sass';
 
 
 
@@ -46,7 +46,7 @@ class Index extends Component {
             <Dimmer.Dimmable blurring dimmed={active} /*onClick={this.handleHide}*/ dimmer={{active}} >
 
                 {/*{getComponentsFromComponentsListProps}*/}
-                <MainMenu showPlayobjectProp={false} round={"first_round"}/>
+                {/*<MainMenu showPlayobjectProp={false} round={"first_round"}/>*/}
 
                 <Dimmer active={active}  page>
                     <Loader size="massive">Loading</Loader>

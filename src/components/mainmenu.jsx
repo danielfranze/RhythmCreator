@@ -5,7 +5,7 @@ import Workspace from './workspace.jsx';
 
 import { Slider } from 'react-semantic-ui-range'
 import {Segment,Grid,Label,Input} from 'semantic-ui-react';
-//import '../sass/main.sass';
+//import '../css/main.sass';
 
 
 export default class MainMenu extends Component {
@@ -25,6 +25,8 @@ export default class MainMenu extends Component {
 
 
 }
+
+
 
   handleClickSettingsButton =  () => {
     this.state.showSettings ? 
@@ -122,6 +124,8 @@ export default class MainMenu extends Component {
               <Workspace  showPlayobjectProp={this.props.showPlayobjectProp && this.state.playButtonActive} 
                           round={this.props.round}
                           CurrentRangeToneLines={this.state.CurrentRangeToneLines}
+                          numerOfrows={5}
+                          numberOfColumns={16}
                           />
 
 

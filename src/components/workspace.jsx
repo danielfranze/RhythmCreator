@@ -2,7 +2,8 @@ import _ from 'lodash'
 import React, { Component }from 'react'
 import { Grid, Icon, Transition} from 'semantic-ui-react'
 import StepSequencer from './stepSequencer.jsx';
-//import '../sass/main.sass';
+//import grey from '../assets/sass/main.sass';
+import colors from "../assets/js/colors"
 
 export default class Workspace extends Component {
     //state = { visible: false }
@@ -14,22 +15,18 @@ export default class Workspace extends Component {
             visibleLeft: false,
             visibleRight: false,
             iconSize: 'huge',
-            iconColor: '#D3D3D3',
+            iconColor: colors.grey,
             animationName: 'jiggle',
             animationDuration: 1800,
-            numerOfrows: 5,
-            numberOfColumns: 16,
+            numerOfrows: this.props.numerOfrows,
+            numberOfColumns: this.props.numberOfColumns,
             displayToneLines: false,
             showToneLineAnimationHide: 0,
-            showToneLineAnimationShow: 2000,
-            stepSequencerMatrix: [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
+            showToneLineAnimationShow: 2000, //mill secs
+            stepSequencerMatrix: Array.from(Array(this.props.numerOfrows), () => Array(this.props.numberOfColumns).fill(0))
 
         }
-        _.times(this.state.numberOfColumns, column  => (0))
+        //_.times(this.state.numberOfColumns, column  => (0))
 
         if(this.props.round == "secound_round"){
             setTimeout(() =>{
@@ -38,6 +35,8 @@ export default class Workspace extends Component {
             setTimeout(() =>{
                 this.setState({showToneLineAnimationShow: 0 });
             }, this.state.showToneLineAnimationShow + 2000 )
+
+
 
             /*var arrayhelper = []
             _.times(this.state.numerOfrows, row => {
@@ -63,18 +62,25 @@ export default class Workspace extends Component {
         }, 0)
     }
 
+    handleParent=  () => {
+        console.log("Das ist ein Test!")
+      }
 
     setValueInStepSequencerMatrix = (row, column) =>{
         var cache = this.state.stepSequencerMatrix
-        cache[row][column] = 1
+        if(cache[row][column] == 0){
+            cache[row][column] = 1
+        } else {
+            cache[row][column] = 0
+        }
         this.setState({stepSequencerMatrix: cache });
-        console.log("Nein!!!!!!!!")
+
     }
 
     
     setIconColor(row, column){
         if(this.state.stepSequencerMatrix[row][column] == 0){
-            return("#D3D3D3")
+            return(colors.grey)
         } else {
             return("red")
         }
@@ -82,7 +88,7 @@ export default class Workspace extends Component {
     }
 
     toggleVisibility = () => {
-        console.log("doch funktioniert!!!")
+
         this.setState({visible: !this.state.visible })}
 
     //setAnimation = () =>  this.setState({showToneLineAnimationShow: 0})
@@ -132,7 +138,8 @@ export default class Workspace extends Component {
                 animationName,
                 animationDuration,
                 iconSize,
-                iconColor
+                iconColor,
+                stepSequencerMatrix
         } = this.state
 
 
@@ -203,6 +210,10 @@ export default class Workspace extends Component {
             </Grid>
         )
 
-        return  (<div>{result}<StepSequencer/></div> )
+        return  (<div>{result}<StepSequencer    handleParent={this.handleParent}
+                                                numerOfrows ={numerOfrows}
+                                                numberOfColumns={numberOfColumns}
+                                                stepSequencerMatrix={stepSequencerMatrix}
+                                                /></div> )
     }
 }
