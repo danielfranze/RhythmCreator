@@ -9,22 +9,28 @@ import {Segment,Grid,Label,Input} from 'semantic-ui-react';
 
 
 export default class MainMenu extends Component {
-  state = { 
-    modalOpen: false, 
-    dropDownMenuOpen: false,
-    playButtonActive: true,
-    playButtonName: "pause circle",
-    CurrentRangeToneLines: 4,
-    showSettings: false,
-    settingsButton: "setting",
-    settingsText: "Settings"
-  }
+  
 
   constructor(props){
     super(props)
+    this.child = React.createRef();
+    this.state = { 
+      modalOpen: false, 
+      dropDownMenuOpen: false,
+      playButtonActive: true,
+      playButtonName: "pause circle",
+      CurrentRangeToneLines: 4,
+      showSettings: false,
+      settingsButton: "setting",
+      settingsText: "Settings"
+    }
 
+  }
 
-}
+  onClickReset = () => {
+    this.child.current.deleteFieldsInStepSequencerMatrix();
+    this.handleDownMenuClose()
+  };
 
 
 
@@ -93,6 +99,7 @@ export default class MainMenu extends Component {
             onClose={this.handleModalClose}
             basic
             size='small'
+            
           >
             <Header size='huge' icon='warning sign' content='Confirm Deletion'/>
             <Modal.Content>
@@ -106,8 +113,8 @@ export default class MainMenu extends Component {
                 <Icon size='huge' name='checkmark' /> <p>No</p>
               </Button>
 
-              <Button size='huge' color='red' onClick={this.handleDownMenuClose} inverted>
-                <Icon size='huge' name='delete' /> <p>Delete</p>
+              <Button size='huge' color='red' onClick={this.onClickReset} inverted> {/*this.onClickReset*/}
+                <Icon size='huge' name='delete'/> <p>Delete</p>
               </Button>
             </Modal.Actions>
           </Modal>
@@ -126,6 +133,7 @@ export default class MainMenu extends Component {
                           CurrentRangeToneLines={this.state.CurrentRangeToneLines}
                           numerOfrows={5}
                           numberOfColumns={16}
+                          ref={this.child}
                           />
 
 

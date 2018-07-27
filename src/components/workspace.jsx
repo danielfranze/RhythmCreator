@@ -66,6 +66,12 @@ export default class Workspace extends Component {
         console.log("Das ist ein Test!")
       }
 
+
+    deleteFieldsInStepSequencerMatrix = () => {
+        this.setState({stepSequencerMatrix: Array.from(Array(this.props.numerOfrows), 
+                                            () => Array(this.props.numberOfColumns).fill(0))})
+    }
+
     setValueInStepSequencerMatrix = (row, column) =>{
         var cache = this.state.stepSequencerMatrix
         if(cache[row][column] == 0){
