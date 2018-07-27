@@ -221,6 +221,7 @@ export default class Workspace extends Component {
                                                 numerOfrows ={numerOfrows}
                                                 numberOfColumns={numberOfColumns}
                                                 stepSequencerMatrix={stepSequencerMatrix}
-                                                bpm={this.props.bpm}/></div> )
+                                                bpm={this.props.bpm}
+                                                playButtonActive={this.props.showPlayobjectProp}/></div> )
     }
 }

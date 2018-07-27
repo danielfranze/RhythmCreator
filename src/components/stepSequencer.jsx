@@ -72,6 +72,14 @@ export default class StepSequencer extends React.Component {
         }, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "16n")})
     }
 
+    startAndStopLoop = () =>{
+        if(this.props.play){
+            Tone.Transport.stop()
+        }else{
+            Tone.Transport.start()
+        }
+    }
+
     componentDidMount() {
         this.initPlayers()
         // wait for buffer
@@ -84,9 +92,14 @@ export default class StepSequencer extends React.Component {
         
         this.state.loop.start()
         Tone.Transport.bpm.value = this.props.bpm;
-        //Tone.Transport.swing = 0.1;
-        Tone.Transport.start();
-        
+        Tone.Transport.swing = this.props.swing;
+
+
+        //this.state.play = this.props.playButtonActive
+
+        this.props.playButtonActive ? Tone.Transport.start() : (
+            Tone.Transport.pause())
+
         this.props.handleParent();
         
         return  (<div></div>)

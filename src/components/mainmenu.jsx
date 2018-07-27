@@ -183,7 +183,9 @@ export default class MainMenu extends Component {
                       }}/>
                   </Segment>
                 </Grid.Column>
-                <Grid.Column width={6}/>
+                <Grid.Column width={6}>
+                
+                </Grid.Column>
 
                 </Grid>
               </Transition>
