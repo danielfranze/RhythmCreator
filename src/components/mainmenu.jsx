@@ -175,9 +175,11 @@ export default class MainMenu extends Component {
                         max:8,
                         step:1,
                         onChange: (value) => {
+                          this.setState({playButtonActive: false})
                           this.setState({
                             CurrentRangeToneLines:value
                           })
+                          this.setState({playButtonActive: true})
                           //this.handleCurrentRangeToneLines(value)
                         }
                       }}/>

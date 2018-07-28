@@ -23,7 +23,8 @@ export default class Workspace extends Component {
             displayToneLines: false,
             showToneLineAnimationHide: 0,
             showToneLineAnimationShow: 2000, //mill secs
-            stepSequencerMatrix: Array.from(Array(this.props.numerOfrows), () => Array(this.props.numberOfColumns).fill(0))
+            stepSequencerMatrix: Array.from(Array(this.props.numerOfrows), () => Array(this.props.numberOfColumns).fill(0)),
+            stepSequencerMatrix2: Array.from(Array(this.props.numerOfrows), () => Array(this.props.numberOfColumns).fill(0))
             //bpm: this.props.bpm
 
         }
@@ -63,8 +64,26 @@ export default class Workspace extends Component {
         }, 0)
     }
 
-    handleParent=  () => {
+    handleParent=  (newValues) => {
+        //console.log("Das ist ein Test!" + " row " +  row + "col" + col)
         console.log("Das ist ein Test!")
+        var newStepSequencerMatrix = this.state.stepSequencerMatrix2
+        newValues.forEach((element, i) =>{
+            newStepSequencerMatrix[element[0]][element[1]] = 2
+        })
+
+        //newStepSequencerMatrix[row][col] = 2
+        this.setState({stepSequencerMatrix2: newStepSequencerMatrix})
+
+        newValues.forEach((element, i) =>{
+            newStepSequencerMatrix[element[0]][element[1]] = 1
+        })
+        setTimeout(() =>{
+
+            this.setState({stepSequencerMatrix2: newStepSequencerMatrix});
+            //this.setState({visibleRight: true});
+        }, 100)
+
       }
 
 
@@ -88,8 +107,10 @@ export default class Workspace extends Component {
     setIconColor(row, column){
         if(this.state.stepSequencerMatrix[row][column] == 0){
             return(colors.grey)
-        } else {
+        } else if((this.state.stepSequencerMatrix[row][column] == 1) && (this.state.stepSequencerMatrix2[row][column] != 2)){
             return("red")
+        } else {
+            return("yellow")
         }
 
     }
@@ -180,7 +201,8 @@ export default class Workspace extends Component {
                                             size={iconSize} 
                                             style={{color:this.setIconColor(row, column)}}
                                             /*onClick={this.setValueInStepSequencerMatrix(row, column)}*/
-                                            onClick={() => this.setValueInStepSequencerMatrix(row, column)}>
+                                            onClick={() => this.setValueInStepSequencerMatrix(row, column)}
+                                            link>
 
                                         {/*this.setState({rangeToneLines: this.props.CurrentRangeToneLines})*/}
                                        
@@ -212,7 +234,7 @@ export default class Workspace extends Component {
         
         const result = (
             <Grid celled>
-                {this.props.showPlayobjectProp ? (<div className="playobject" ></div>) : (<div/>)}
+                {/*this.props.showPlayobjectProp ? (<div className="playobject" ></div>) : (<div/>)*/}
                 {grid}
             </Grid>
         )

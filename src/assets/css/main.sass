@@ -22,12 +22,16 @@ $darkgrey: #686868;
     background: $grey
     width: 11px
     height: 60%
-    top: -70px !important
+    top: -85px !important
     position: absolute
     top: 0
     left: 3.2em !important
     margin-left: 0%
-    //z-index: 0
+    //z-index: -2
+    opacity: 0.5
+    border: 2px solid $grey
+    border-radius: 25px
+
 
 .toneLineOne
   position: absolute
@@ -43,13 +47,19 @@ $darkgrey: #686868;
   //background: $grey
   pointer-events: none
   z-index: -1
+  
+  //opacity: 0.25
+
+//.link::before
+ // opacity: 0.5 !important
+
 
 
 /***********************************
  *       Workspace Animation 
  ***********************************/
 .playobject 
-  animation: MoveLeftRight 54s linear infinite
+  animation: MoveLeftRight 2s linear infinite
   position: absolute
   left: 0
   bottom: 0
@@ -66,10 +76,15 @@ $darkgrey: #686868;
 
 @keyframes MoveLeftRight 
   0%, 100%
+    left: 8%
+  100% 
+    left: 93.75% - 2%
+
+/*MoveLeftRight 
+  0%, 100%
     left: 6.25%
   100% 
-    left: 93.75% - 1.5%
-  
+    left: 93.75% - 1.5% */
  
 /***********************************
  *            Workspace 

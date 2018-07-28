@@ -63,21 +63,25 @@ export default class StepSequencer extends React.Component {
     initLoop = () => {
         this.setState({loop: new Tone.Sequence((time, column) => {
             //console.log(col)
-            this.props.stepSequencerMatrix.forEach((element, index)=>{
-                if(element[column] == 1){
-                    this.state.players[index][0].start()
+            var newValuesForStepSequencerMatrix = []
+
+            this.props.stepSequencerMatrix.forEach((element, row)=>{
+                // first case for performance improvements
+                if(element[column] == 0){
+                }else if((element[column] == 1) || (element[column] == 2)){
+                    this.state.players[row][0].start()
+                    
+                    newValuesForStepSequencerMatrix.push([row, column])
+                    
+                    ///////////////////this.props.handleParent(row, column);
                 }
             })
+            if(newValuesForStepSequencerMatrix.length != 0){
+                this.props.handleParent(newValuesForStepSequencerMatrix);
+            }
+            
             //this.state.players[4][0].start()
         }, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "16n")})
-    }
-
-    startAndStopLoop = () =>{
-        if(this.props.play){
-            Tone.Transport.stop()
-        }else{
-            Tone.Transport.start()
-        }
     }
 
     componentDidMount() {
@@ -97,10 +101,9 @@ export default class StepSequencer extends React.Component {
 
         //this.state.play = this.props.playButtonActive
 
-        this.props.playButtonActive ? Tone.Transport.start() : (
-            Tone.Transport.pause())
+        this.props.playButtonActive ? Tone.Transport.start() : Tone.Transport.pause()
 
-        this.props.handleParent();
+        
         
         return  (<div></div>)
     }
