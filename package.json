@@ -33,7 +33,6 @@
     "http-server": "^0.11.1",
     "node-sass": "^4.9.2",
     "path": "^0.12.7",
-    "pizzicato": "^0.6.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-semantic-ui-range": "^0.6.1",

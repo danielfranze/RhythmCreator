@@ -44,7 +44,7 @@ export default class StepSequencer extends React.Component {
             //console.log("element1: " + element[1].toString());
             element[1] = new Tone.PitchShift ({
                 pitch  : 0 ,
-                windowSize  : 0.01 ,
+                windowSize  : 0.01 , // 0.01
                 delayTime  : 0 ,
                 feedback  : 0
                 }).toMaster();
@@ -63,20 +63,23 @@ export default class StepSequencer extends React.Component {
     initLoop = () => {
         this.setState({loop: new Tone.Sequence((time, column) => {
             //console.log(col)
-            var newValuesForStepSequencerMatrix = []
+            if(this.props.tracker){
+                var newValuesForStepSequencerMatrix = []
+            }
+            
 
             this.props.stepSequencerMatrix.forEach((element, row)=>{
                 // first case for performance improvements
                 if(element[column] == 0){
                 }else if((element[column] == 1) || (element[column] == 2)){
                     this.state.players[row][0].start()
-                    
-                    newValuesForStepSequencerMatrix.push([row, column])
-                    
+                    if(this.props.tracker){
+                        newValuesForStepSequencerMatrix.push([row, column])
+                    }
                     ///////////////////this.props.handleParent(row, column);
                 }
             })
-            if(newValuesForStepSequencerMatrix.length != 0){
+            if((newValuesForStepSequencerMatrix.length != 0) && this.props.tracker){
                 this.props.handleParent(newValuesForStepSequencerMatrix);
             }
             

@@ -4,6 +4,7 @@ import { Grid, Icon, Transition} from 'semantic-ui-react'
 import StepSequencer from './stepSequencer.jsx';
 //import grey from '../assets/sass/main.sass';
 import colors from "../assets/js/colors"
+//import update from 'immutability-helper';
 
 export default class Workspace extends Component {
     //state = { visible: false }
@@ -69,10 +70,10 @@ export default class Workspace extends Component {
         console.log("Das ist ein Test!")
         var newStepSequencerMatrix = this.state.stepSequencerMatrix2
         newValues.forEach((element, i) =>{
+
             newStepSequencerMatrix[element[0]][element[1]] = 2
         })
 
-        //newStepSequencerMatrix[row][col] = 2
         this.setState({stepSequencerMatrix2: newStepSequencerMatrix})
 
         newValues.forEach((element, i) =>{
@@ -109,7 +110,7 @@ export default class Workspace extends Component {
             return(colors.grey)
         } else if((this.state.stepSequencerMatrix[row][column] == 1) && (this.state.stepSequencerMatrix2[row][column] != 2)){
             return("red")
-        } else {
+        } else if(this.state.stepSequencerMatrix2[row][column] == 2){
             return("yellow")
         }
 
@@ -244,6 +245,8 @@ export default class Workspace extends Component {
                                                 numberOfColumns={numberOfColumns}
                                                 stepSequencerMatrix={stepSequencerMatrix}
                                                 bpm={this.props.bpm}
-                                                playButtonActive={this.props.showPlayobjectProp}/></div> )
+                                                playButtonActive={this.props.showPlayobjectProp}
+                                                tracker={this.props.tracker}
+                                                /></div> )
     }
 }

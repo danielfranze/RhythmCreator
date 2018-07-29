@@ -4,7 +4,7 @@ import { Menu, Icon, Header, Dropdown, Modal, Button, Transition} from 'semantic
 import Workspace from './workspace.jsx';
 
 import { Slider } from 'react-semantic-ui-range'
-import {Segment,Grid,Label,Input} from 'semantic-ui-react';
+import {Segment,Grid,Radio,Input} from 'semantic-ui-react';
 //import '../css/main.sass';
 
 
@@ -23,9 +23,17 @@ export default class MainMenu extends Component {
       showSettings: false,
       settingsButton: "setting",
       settingsText: "Settings",
-      bpm: 120
+      bpm: 120,
+      tracker: false
     }
 
+  }
+
+  onClickTracker = () => {
+    console.log("works")
+    this.state.tracker ? 
+    this.setState({tracker: false}) : 
+    this.setState({tracker: true})
   }
 
   onClickReset = () => {
@@ -136,6 +144,7 @@ export default class MainMenu extends Component {
                           numberOfColumns={16}
                           bpm={this.state.bpm}
                           ref={this.child}
+                          tracker={this.state.tracker}
                           />
 
 
@@ -145,6 +154,12 @@ export default class MainMenu extends Component {
               <Transition visible={this.state.showSettings} animation="fade" duration={{hide:500,show: 2000}} >
                 <Grid>
                 <Grid.Column width={2}/>
+                <Grid.Column width={4}>
+                  <Segment>
+                  <h2>Tracker</h2>
+                    <Radio toggle checked={this.state.tracker} onClick={() => this.onClickTracker()}/>
+                  </Segment>
+                </Grid.Column>
                 <Grid.Column width={4}>
                 <Segment>
                   <h2>BPM {this.state.bpm}</h2>
@@ -156,9 +171,11 @@ export default class MainMenu extends Component {
                         max:200,
                         step:1,
                         onChange: (value) => {
+                          //this.setState({playButtonActive: false})
                           this.setState({
                             bpm:value
                           })
+                          //this.setState({playButtonActive: true})
                           //this.handleCurrentRangeToneLines(value)
                         }
                       }}/>
@@ -166,7 +183,7 @@ export default class MainMenu extends Component {
                 </Grid.Column>
                 <Grid.Column width={4}>
                   <Segment>
-                  <h2>Line spacing {this.state.CurrentRangeToneLines}</h2>
+                  <h2>Bar line {this.state.CurrentRangeToneLines}</h2>
 
                       <Slider color="grey" inverted={false} 
                         settings={{
@@ -185,7 +202,7 @@ export default class MainMenu extends Component {
                       }}/>
                   </Segment>
                 </Grid.Column>
-                <Grid.Column width={6}>
+                <Grid.Column width={2}>
                 
                 </Grid.Column>
 
