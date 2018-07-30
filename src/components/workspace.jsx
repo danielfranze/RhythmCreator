@@ -94,7 +94,10 @@ export default class Workspace extends Component {
         this.setState({stepSequencerMatrix: Array.from(Array(this.props.numerOfrows), 
                                             () => Array(this.props.numberOfColumns).fill(0))})
     }
-
+    deleteFieldsInStepSequencerMatrix2 = () => {
+        this.setState({stepSequencerMatrix2: Array.from(Array(this.props.numerOfrows), 
+                                            () => Array(this.props.numberOfColumns).fill(0))})
+    }
     setValueInStepSequencerMatrix = (row, column) =>{
         var newStepSequencerMatrix = _.cloneDeep(this.state.stepSequencerMatrix)
         if(newStepSequencerMatrix[row][column] == 0){

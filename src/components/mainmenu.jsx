@@ -30,6 +30,7 @@ export default class MainMenu extends Component {
   }
 
   onClickTracker = () => {
+    this.child.current.deleteFieldsInStepSequencerMatrix2()
     this.state.tracker ? 
     this.setState({tracker: false}) : 
     this.setState({tracker: true})
