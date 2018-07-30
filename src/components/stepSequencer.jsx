@@ -43,7 +43,7 @@ export default class StepSequencer extends React.Component {
             //console.log("element0: " + element[0].toString());
             //console.log("element1: " + element[1].toString());
             element[1] = new Tone.PitchShift ({
-                pitch  : 0 ,
+                pitch  : this.props.pitch[index] ,
                 windowSize  : 0.01 , // 0.01
                 delayTime  : 0 ,
                 feedback  : 0
@@ -52,7 +52,7 @@ export default class StepSequencer extends React.Component {
             element[0] = new Tone.Player({
                 "url" : sounds[index],
                 "loop" : false,
-                "volume": -10
+                "volume": this.props.volume[index]
             }).connect(element[1]);
                 
           });
@@ -71,6 +71,8 @@ export default class StepSequencer extends React.Component {
                 // first case for performance improvements
                 if(element[column] == 0){
                 }else if((element[column] == 1) || (element[column] == 2)){
+                    this.state.players[row][0].volume.value = this.props.volume[row]
+                    this.state.players[row][1].pitch = this.props.pitch[row]
                     this.state.players[row][0].start()
 
                     if(this.props.tracker){

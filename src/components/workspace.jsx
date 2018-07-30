@@ -1,15 +1,20 @@
 import _ from 'lodash'
 import React, { Component }from 'react'
-import { Grid, Icon, Transition} from 'semantic-ui-react'
+import { Grid, Icon, Transition, Popup, Header} from 'semantic-ui-react'
 import StepSequencer from './stepSequencer.jsx';
 //import grey from '../assets/sass/main.sass';
 import colors from "../assets/js/colors"
+import { Slider } from 'react-semantic-ui-range'
 //import update from 'immutability-helper';
+
+//const empty2DArray = Array.from(Array(this.props.numerOfrows), () => Array(this.props.numberOfColumns).fill(0))
 
 export default class Workspace extends Component {
     //state = { visible: false }
+    
     constructor(props){
         super(props)
+        const empty2DArray = Array.from(Array(this.props.numerOfrows), () => Array(this.props.numberOfColumns).fill(0))
 
         this.state = {
             visible: false,
@@ -24,8 +29,10 @@ export default class Workspace extends Component {
             displayToneLines: false,
             showToneLineAnimationHide: 0,
             showToneLineAnimationShow: 2000, //mill secs
-            stepSequencerMatrix: Array.from(Array(this.props.numerOfrows), () => Array(this.props.numberOfColumns).fill(0)),
-            stepSequencerMatrix2: Array.from(Array(this.props.numerOfrows), () => Array(this.props.numberOfColumns).fill(0))
+            stepSequencerMatrix: empty2DArray,
+            stepSequencerMatrix2: empty2DArray,
+            pitch: [[0],[0],[0],[0],[0]],
+            volume: [[-12],[-12],[-12],[-12],[-12]]
             //bpm: this.props.bpm
 
         }
@@ -66,11 +73,7 @@ export default class Workspace extends Component {
     }
 
     handleParent = (newValues) => {
-        var newStepSequencerMatrix2 = [ [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] ]
+        var newStepSequencerMatrix2 = Array.from(Array(this.props.numerOfrows), () => Array(this.props.numberOfColumns).fill(0))
         newValues.forEach((element, i) =>{
 
             newStepSequencerMatrix2[element[0]][element[1]] = 2
@@ -171,7 +174,9 @@ export default class Workspace extends Component {
                 animationDuration,
                 iconSize,
                 iconColor,
-                stepSequencerMatrix
+                stepSequencerMatrix,
+                pitch,
+                volume
         } = this.state
 
 
@@ -228,7 +233,52 @@ export default class Workspace extends Component {
             ***********************************/}
             <Grid.Column width={1}>
                 <Transition visible={visibleRight} animation={animationName} duration={animationDuration}>
-                    <Icon name="ellipsis vertical" size={iconSize} style={{color:iconColor}}></Icon>
+                    
+
+
+                      <Popup trigger={<Icon name="ellipsis vertical" size={iconSize} style={{color:iconColor}}link></Icon>} flowing hoverable on='click'>
+                        <Grid centered divided columns={2}>
+                        <Grid.Column textAlign='center'>
+                        
+                        <h3>Pitch <br/>{this.state.pitch[row]}</h3>
+                            
+                            <Slider color="grey" inverted={false} 
+                        settings={{
+                        start: 0,
+                        min:-30,
+                        max:30,
+                        step:1,
+                        onChange: (value) => {
+                            var newPitch = _.clone(this.state.pitch)
+                            newPitch[row] = value
+                            this.setState({pitch: newPitch})
+                        }
+                        }}/>
+                            
+                        </Grid.Column>
+                        <Grid.Column textAlign='center'>
+                        <h3>Volume <br/>{this.state.volume[row]}</h3>
+                            <Slider color="grey" inverted={false} 
+                        settings={{
+                        start: -12,
+                        min:-20,
+                        max:0,
+                        step:1,
+                        onChange: (value) => {
+                            var newVolume = _.clone(this.state.volume)
+                            newVolume[row] = value
+                            this.setState({volume: newVolume})
+                        }
+                        }}/>
+                            
+                        </Grid.Column>
+                        </Grid>
+                    </Popup> 
+
+
+
+
+
                 </Transition>
             </Grid.Column>
         </Grid.Row>
@@ -253,6 +303,8 @@ export default class Workspace extends Component {
                                                 bpm={this.props.bpm}
                                                 playButtonActive={this.props.showPlayobjectProp}
                                                 tracker={this.props.tracker}
+                                                pitch={pitch}
+                                                volume={volume}
                                                 /></div> )
     }
 }
