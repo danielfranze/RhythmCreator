@@ -94,10 +94,10 @@ export default class StepSequencer extends React.Component {
         
       }
 
-    handlerSetBPM = (bpm) => {
+    handlerSetBPM = () => {
         Tone.Transport.pause()
-        Tone.Transport.bpm.value = bpm;
-        this.state.loop.start()
+        Tone.Transport.bpm.value = this.props.bpm;
+        Tone.Transport.start()
     }
 
     render(){
@@ -106,8 +106,9 @@ export default class StepSequencer extends React.Component {
         this.state.loop.start()
         //Tone.Transport.pause()
         Tone.Transport.bpm.value = this.props.bpm;
+        //this.handlerSetBPM()
         //this.handlerSetBPM(this.props.bpm)
-        Tone.Transport.swing = this.props.swing;
+        //Tone.Transport.swing = this.props.swing;
 
 
         //this.state.play = this.props.playButtonActive
@@ -119,7 +120,7 @@ export default class StepSequencer extends React.Component {
         
         
         return  (
-                <div>{console.log("StepSequencer")}
+                <div>{/*console.log("StepSequencer")*/}
                 
                 </div>)
     }

@@ -23,11 +23,12 @@ export default class MainMenu extends Component {
       showSettings: false,
       settingsButton: "setting",
       settingsText: "Settings",
-      bpm: 120,
+      bpm: 42,
       tracker: false
     }
 
   }
+
 
   onClickTracker = () => {
     this.child.current.deleteFieldsInStepSequencerMatrix2()
@@ -134,7 +135,7 @@ export default class MainMenu extends Component {
     )
 
     return (<div>
-              {console.log("Mainmenu")}
+              {/*console.log("Mainmenu")*/}
               {menuContainer}
               <Workspace  showPlayobjectProp={this.props.showPlayobjectProp && this.state.playButtonActive} 
                           round={this.props.round}
@@ -160,23 +161,25 @@ export default class MainMenu extends Component {
                   </Segment>
                 </Grid.Column>
                 <Grid.Column width={4}>
-                <Segment>
+                <Segment >
                   <h2>BPM {this.state.bpm}</h2>
 
-                      <Slider color="grey" inverted={false} 
+                      <Slider color="grey" inverted={false}
                         settings={{
                         start: this.state.bpm,
                         min:0,
                         max:120,
-                        step:1,
+                        step:10,
                         onChange: (value) => {
                           //this.setState({playButtonActive: false})
-                          this.setState({
-                            bpm:value
-                          })
+                          this.setState({bpm:value})
                           //this.setState({playButtonActive: true})
+                          //setTimeout(() =>{this.setState({playButtonActive: true})   }, 10)
+                          //this.handlePressButton()
+                          //this.handlePressButton()
                           //this.handleCurrentRangeToneLines(value)
                         }
+                        
                       }}/>
                   </Segment>
                 </Grid.Column>
@@ -192,12 +195,8 @@ export default class MainMenu extends Component {
                         step:1,
                         onChange: (value) => {
                           this.setState({playButtonActive: false})
-                          this.setState({
-                            CurrentRangeToneLines:value
-                          })
-                          this.setState({playButtonActive: true})
-                          //this.handleCurrentRangeToneLines(value)
-                        }
+                          this.setState({CurrentRangeToneLines:value})
+                          this.setState({playButtonActive: true})}
                       }}/>
                   </Segment>
                 </Grid.Column>

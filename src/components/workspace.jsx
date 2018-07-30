@@ -114,7 +114,7 @@ export default class Workspace extends Component {
         if(this.state.stepSequencerMatrix[row][column] == 0){
             return(colors.grey)
         } else if((this.state.stepSequencerMatrix[row][column] == 1) && (this.state.stepSequencerMatrix2[row][column] != 2)){
-            return("black")
+            return(colors.darkgrey)
         } else if(this.state.stepSequencerMatrix2[row][column] == 2){
             return("yellow")
         }
@@ -245,7 +245,7 @@ export default class Workspace extends Component {
         )
 
         return  (<div>
-                    {console.log("Workspace")}
+                    {/*console.log("Workspace")*/}
                     {result}<StepSequencer    handleParent={this.handleParent}
                                                 numerOfrows ={numerOfrows}
                                                 numberOfColumns={numberOfColumns}
