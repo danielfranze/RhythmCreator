@@ -30,7 +30,6 @@ export default class MainMenu extends Component {
   }
 
   onClickTracker = () => {
-    console.log("works")
     this.state.tracker ? 
     this.setState({tracker: false}) : 
     this.setState({tracker: true})
@@ -39,15 +38,12 @@ export default class MainMenu extends Component {
   onClickReset = () => {
     this.child.current.deleteFieldsInStepSequencerMatrix();
     this.handleDownMenuClose()
-  };
-
-
+  }
 
   handleClickSettingsButton =  () => {
     this.state.showSettings ? 
     this.setState({showSettings: false, settingsButton: "setting", settingsText: "Settings" }) : 
     this.setState({showSettings: true, settingsButton: "sign out alternate" , settingsText: "Exit Settings"})
-
   }
 
   handleCurrentRangeToneLines = (value) => {
@@ -61,7 +57,8 @@ export default class MainMenu extends Component {
     this.setState({playButtonActive: true, playButtonName: "pause circle" })
 
   }
-  handleDownMenuClose = () => this.setState({ dropDownMenuOpen: false, modalOpen: false })
+  handleDownMenuClose = () =>{
+    this.setState({ dropDownMenuOpen: false, modalOpen: false })}
   handleDownMenuOpenClose = () => {
     if((this.state.dropDownMenuOpen) == !(this.state.modalOpen)){
       this.setState({dropDownMenuOpen: false })
@@ -69,8 +66,8 @@ export default class MainMenu extends Component {
       this.setState({dropDownMenuOpen: true })
     }
   }
-  handleModalOpen = () => this.setState({ modalOpen: true})
-  handleModalClose = () => this.setState({ modalOpen: false })
+  handleModalOpen = () => {this.setState({ modalOpen: true})}
+  handleModalClose = () => {this.setState({ modalOpen: false })}
 
   render() {
 
@@ -136,6 +133,7 @@ export default class MainMenu extends Component {
     )
 
     return (<div>
+              {console.log("Mainmenu")}
               {menuContainer}
               <Workspace  showPlayobjectProp={this.props.showPlayobjectProp && this.state.playButtonActive} 
                           round={this.props.round}
@@ -168,7 +166,7 @@ export default class MainMenu extends Component {
                         settings={{
                         start: this.state.bpm,
                         min:0,
-                        max:200,
+                        max:120,
                         step:1,
                         onChange: (value) => {
                           //this.setState({playButtonActive: false})

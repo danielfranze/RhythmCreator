@@ -65,25 +65,27 @@ export default class Workspace extends Component {
         }, 0)
     }
 
-    handleParent=  (newValues) => {
-        //console.log("Das ist ein Test!" + " row " +  row + "col" + col)
-        console.log("Das ist ein Test!")
-        var newStepSequencerMatrix = this.state.stepSequencerMatrix2
+    handleParent = (newValues) => {
+        var newStepSequencerMatrix2 = [ [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] ]
         newValues.forEach((element, i) =>{
 
-            newStepSequencerMatrix[element[0]][element[1]] = 2
+            newStepSequencerMatrix2[element[0]][element[1]] = 2
         })
 
-        this.setState({stepSequencerMatrix2: newStepSequencerMatrix})
+        this.setState({stepSequencerMatrix2: newStepSequencerMatrix2})
 
-        newValues.forEach((element, i) =>{
+        /*newValues.forEach((element, i) =>{
             newStepSequencerMatrix[element[0]][element[1]] = 1
         })
+        
         setTimeout(() =>{
+            this.setState({stepSequencerMatrix2: newStepSequencerMatrix})
 
-            this.setState({stepSequencerMatrix2: newStepSequencerMatrix});
-            //this.setState({visibleRight: true});
-        }, 100)
+        }, 100)*/
 
       }
 
@@ -94,13 +96,13 @@ export default class Workspace extends Component {
     }
 
     setValueInStepSequencerMatrix = (row, column) =>{
-        var cache = this.state.stepSequencerMatrix
-        if(cache[row][column] == 0){
-            cache[row][column] = 1
+        var newStepSequencerMatrix = _.cloneDeep(this.state.stepSequencerMatrix)
+        if(newStepSequencerMatrix[row][column] == 0){
+            newStepSequencerMatrix[row][column] = 1
         } else {
-            cache[row][column] = 0
+            newStepSequencerMatrix[row][column] = 0
         }
-        this.setState({stepSequencerMatrix: cache });
+        this.setState({stepSequencerMatrix: newStepSequencerMatrix });
 
     }
 
@@ -109,7 +111,7 @@ export default class Workspace extends Component {
         if(this.state.stepSequencerMatrix[row][column] == 0){
             return(colors.grey)
         } else if((this.state.stepSequencerMatrix[row][column] == 1) && (this.state.stepSequencerMatrix2[row][column] != 2)){
-            return("red")
+            return("black")
         } else if(this.state.stepSequencerMatrix2[row][column] == 2){
             return("yellow")
         }
@@ -117,7 +119,6 @@ export default class Workspace extends Component {
     }
 
     toggleVisibility = () => {
-
         this.setState({visible: !this.state.visible })}
 
     //setAnimation = () =>  this.setState({showToneLineAnimationShow: 0})
@@ -142,8 +143,7 @@ export default class Workspace extends Component {
             
 
     }
-    showToneLine(column, row){
-
+    showToneLine = (column, row) => {
         var element =  (this.helperShowToneLine(row))
 
         var elementInvis =  (<Transition visible={false} animation="fade" 
@@ -200,10 +200,11 @@ export default class Workspace extends Component {
                                     <Icon   id={row.toString() + column.toString()} 
                                             name="circle" 
                                             size={iconSize} 
-                                            style={{color:this.setIconColor(row, column)}}
+                                            style={{color:this.setIconColor(row, column), cursor: "pointer"}}
                                             /*onClick={this.setValueInStepSequencerMatrix(row, column)}*/
                                             onClick={() => this.setValueInStepSequencerMatrix(row, column)}
-                                            link>
+                                            //link
+                                            >
 
                                         {/*this.setState({rangeToneLines: this.props.CurrentRangeToneLines})*/}
                                        
@@ -240,7 +241,9 @@ export default class Workspace extends Component {
             </Grid>
         )
 
-        return  (<div>{result}<StepSequencer    handleParent={this.handleParent}
+        return  (<div>
+                    {console.log("Workspace")}
+                    {result}<StepSequencer    handleParent={this.handleParent}
                                                 numerOfrows ={numerOfrows}
                                                 numberOfColumns={numberOfColumns}
                                                 stepSequencerMatrix={stepSequencerMatrix}

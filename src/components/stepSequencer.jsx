@@ -1,4 +1,4 @@
-//import _ from 'lodash'
+import _ from 'lodash'
 import React, { Component } from 'react'
 import { Grid, Image, Icon, Transition} from 'semantic-ui-react'
 //import Pizzicato from "pizzicato";
@@ -67,19 +67,19 @@ export default class StepSequencer extends React.Component {
                 var newValuesForStepSequencerMatrix = []
             }
             
-
             this.props.stepSequencerMatrix.forEach((element, row)=>{
                 // first case for performance improvements
                 if(element[column] == 0){
                 }else if((element[column] == 1) || (element[column] == 2)){
                     this.state.players[row][0].start()
+
                     if(this.props.tracker){
                         newValuesForStepSequencerMatrix.push([row, column])
                     }
-                    ///////////////////this.props.handleParent(row, column);
+
                 }
             })
-            if((newValuesForStepSequencerMatrix.length != 0) && this.props.tracker){
+            if(this.props.tracker && (newValuesForStepSequencerMatrix.length != 0)){
                 this.props.handleParent(newValuesForStepSequencerMatrix);
             }
             
@@ -94,11 +94,19 @@ export default class StepSequencer extends React.Component {
         
       }
 
+    handlerSetBPM = (bpm) => {
+        Tone.Transport.pause()
+        Tone.Transport.bpm.value = bpm;
+        this.state.loop.start()
+    }
+
     render(){
 
         
         this.state.loop.start()
+        //Tone.Transport.pause()
         Tone.Transport.bpm.value = this.props.bpm;
+        //this.handlerSetBPM(this.props.bpm)
         Tone.Transport.swing = this.props.swing;
 
 
@@ -106,8 +114,13 @@ export default class StepSequencer extends React.Component {
 
         this.props.playButtonActive ? Tone.Transport.start() : Tone.Transport.pause()
 
+
+
         
         
-        return  (<div></div>)
+        return  (
+                <div>{console.log("StepSequencer")}
+                
+                </div>)
     }
 }
