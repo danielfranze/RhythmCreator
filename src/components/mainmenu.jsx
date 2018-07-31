@@ -194,9 +194,14 @@ export default class MainMenu extends Component {
                         max:8,
                         step:1,
                         onChange: (value) => {
+                          if(this.state.playButtonActive){
                           this.setState({playButtonActive: false})
                           this.setState({CurrentRangeToneLines:value})
-                          this.setState({playButtonActive: true})}
+                          this.setState({playButtonActive: true})
+                          } else {
+                            this.setState({CurrentRangeToneLines:value})
+                          }
+                        }
                       }}/>
                   </Segment>
                 </Grid.Column>
