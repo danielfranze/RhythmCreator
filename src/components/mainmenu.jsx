@@ -23,7 +23,7 @@ export default class MainMenu extends Component {
       showSettings: false,
       settingsButton: "setting",
       settingsText: "Settings",
-      bpm: 42,
+      bpm: 40,
       tracker: false
     }
 
@@ -97,8 +97,8 @@ export default class MainMenu extends Component {
       <Dropdown open={this.state.dropDownMenuOpen}  onClick={this.handleDownMenuOpenClose }
       size='massive' width="100px" position="right" icon='th' pointing='top right' className='link item'>
         <Dropdown.Menu >
-          <Dropdown.Item icon='folder' text='Open'/>
-          <Dropdown.Item icon='file' text='Save'/>
+          <Dropdown.Item icon='file' text='Save' onClick={() => this.child.current.saveSettings()}/>
+          <Dropdown.Item icon='download' text='Load' onClick={() => this.child.current.loadSettings()}/>
 
           <Modal
             dimmer="blurring"

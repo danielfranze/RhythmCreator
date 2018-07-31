@@ -15,6 +15,8 @@ export default class Workspace extends Component {
     constructor(props){
         super(props)
         const empty2DArray = Array.from(Array(this.props.numerOfrows), () => Array(this.props.numberOfColumns).fill(0))
+        const startPitch = [[0],[0],[0],[0],[0]]
+        const startVolume = [[-12],[-12],[-12],[-12],[-12]]
 
         this.state = {
             visible: false,
@@ -31,8 +33,13 @@ export default class Workspace extends Component {
             showToneLineAnimationShow: 2000, //mill secs
             stepSequencerMatrix: empty2DArray,
             stepSequencerMatrix2: empty2DArray,
-            pitch: [[0],[0],[0],[0],[0]],
-            volume: [[-12],[-12],[-12],[-12],[-12]]
+            pitch: startPitch,
+            volume: startVolume,
+            settings: {
+                stepSequencerMatrix: empty2DArray,
+                pitch: startPitch,
+                volume: startVolume
+            }
             //bpm: this.props.bpm
 
         }
@@ -70,6 +77,19 @@ export default class Workspace extends Component {
             this.setState({visibleLeft: true, visibleRight: true});
             //this.setState({visibleRight: true});
         }, 0)
+    }
+
+
+    loadSettings = () => {
+        this.setState({ stepSequencerMatrix: this.state.settings.stepSequencerMatrix,
+                        pitch: this.state.settings.pitch,
+                        volume: this.state.settings.volume })
+
+    }
+    saveSettings = () => {
+        this.setState({settings: {  stepSequencerMatrix: this.state.stepSequencerMatrix,
+                                    pitch: this.state.pitch,
+                                    volume: this.state.volume}})
     }
 
     handleParent = (newValues) => {
