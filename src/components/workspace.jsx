@@ -14,6 +14,7 @@ export default class Workspace extends Component {
     
     constructor(props){
         super(props)
+        this.child = React.createRef();
         const empty2DArray = Array.from(Array(this.props.numerOfrows), () => Array(this.props.numberOfColumns).fill(0))
         const startPitch = [[0],[0],[0],[0],[0]]
         const startVolume = [[-12],[-12],[-12],[-12],[-12]]
@@ -122,6 +123,7 @@ export default class Workspace extends Component {
                                             () => Array(this.props.numberOfColumns).fill(0))})
     }
     setValueInStepSequencerMatrix = (row, column) =>{
+        this.child.current.playSound(row)
         var newStepSequencerMatrix = _.cloneDeep(this.state.stepSequencerMatrix)
         if(newStepSequencerMatrix[row][column] == 0){
             newStepSequencerMatrix[row][column] = 1
@@ -325,6 +327,7 @@ export default class Workspace extends Component {
                                                 tracker={this.props.tracker}
                                                 pitch={pitch}
                                                 volume={volume}
+                                                ref={this.child}
                                                 /></div> )
     }
 }

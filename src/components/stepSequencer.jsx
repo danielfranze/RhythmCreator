@@ -96,10 +96,14 @@ export default class StepSequencer extends React.Component {
         
       }
 
-    handlerSetBPM = () => {
+    /*handlerSetBPM = () => {
         Tone.Transport.pause()
         Tone.Transport.bpm.value = this.props.bpm;
         Tone.Transport.start()
+    }*/
+
+    playSound = (row) => {
+        this.state.players[row][0].start()
     }
 
     render(){
