@@ -185,7 +185,7 @@ export default class MainMenu extends Component {
                 </Grid.Column>
                 <Grid.Column width={4}>
                   <Segment>
-                  <h2>Bar line {this.state.CurrentRangeToneLines}</h2>
+                  <h2>Time {this.state.CurrentRangeToneLines}</h2>
 
                       <Slider color="grey" inverted={false} 
                         settings={{

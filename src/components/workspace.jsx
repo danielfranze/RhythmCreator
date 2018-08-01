@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import React, { Component }from 'react'
-import { Grid, Icon, Transition, Popup, Header} from 'semantic-ui-react'
+import { Grid, Icon, Transition, Popup, Button} from 'semantic-ui-react'
 import StepSequencer from './stepSequencer.jsx';
 //import grey from '../assets/sass/main.sass';
 import colors from "../assets/js/colors"
@@ -16,8 +16,8 @@ export default class Workspace extends Component {
         super(props)
         this.child = React.createRef();
         const empty2DArray = Array.from(Array(this.props.numerOfrows), () => Array(this.props.numberOfColumns).fill(0))
-        const startPitch = [[0],[0],[0],[0],[0]]
-        const startVolume = [[-12],[-12],[-12],[-12],[-12]]
+        const startPitch = Array.from(Array(this.props.numerOfrows), () => Array(1).fill(0))
+        const startVolume = Array.from(Array(this.props.numerOfrows), () => Array(1).fill(-12))
 
         this.state = {
             visible: false,
@@ -186,6 +186,23 @@ export default class Workspace extends Component {
         )
     }
 
+    setPattern = (row, numberOfColumnsForPattern) => {
+        var newStepSequencerMatrix = _.cloneDeep(this.state.stepSequencerMatrix)
+        var newRow = []
+        var pattern = this.state.stepSequencerMatrix[row].slice(0,(numberOfColumnsForPattern))
+        console.log(pattern)
+        _.times((newStepSequencerMatrix[row].length/numberOfColumnsForPattern), round => (
+            newRow = newRow.concat(pattern)
+        ))
+        console.log(newRow)
+        if(newStepSequencerMatrix[row].length%numberOfColumnsForPattern){
+            newRow = newRow.concat([pattern[0]])
+        }
+        newStepSequencerMatrix[row] = newRow
+        this.setState({stepSequencerMatrix: newStepSequencerMatrix})
+
+    }
+
     render(){
         const { numberOfColumns,
                 numerOfrows,
@@ -202,9 +219,6 @@ export default class Workspace extends Component {
         } = this.state
 
 
-        
-
-
         const grid = _.times(numerOfrows, row => (
         <Grid.Row key={row}>
             {/***********************************
@@ -214,7 +228,34 @@ export default class Workspace extends Component {
                 <Transition visible={visibleLeft} 
                             animation={animationName} 
                             duration={animationDuration}>
-                    <Icon name="volume up" size={iconSize} onClick={this.toggleVisibility} style={{color:iconColor}}></Icon>
+                              <Popup
+                            trigger={<Icon name="music" size={iconSize} onClick={this.toggleVisibility} style={{color:iconColor}}></Icon>}
+                            on='hover'
+                             hoverable 
+                        >
+
+                        <Button.Group size="massive">
+                            {/*_.times(5, index => (
+                            <React.Fragment>
+                            <Button onClick={() => this.setPattern(row, index+1)}>{index+1}</Button>
+                            <Button.Or/></React.Fragment>
+                            ))
+                            */}
+                            <Button onClick={() => this.setPattern(row, 1)}>1</Button>
+                            <Button.Or />
+                            <Button onClick={() => this.setPattern(row, 2)}>2</Button>
+                            <Button.Or />
+                            <Button onClick={() => this.setPattern(row, 3)}>3</Button>
+                            <Button.Or />
+                            <Button onClick={() => this.setPattern(row, 4)}>4 </Button>
+                            <Button.Or />
+                            <Button onClick={() => this.setPattern(row, 5)}>5 </Button>
+                        </Button.Group>
+
+                        
+
+                        </Popup>
+                    
                 </Transition>
             </Grid.Column>
             {/***********************************
