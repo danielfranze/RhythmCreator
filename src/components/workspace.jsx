@@ -134,12 +134,35 @@ export default class Workspace extends Component {
 
     }
 
-    
+    setIconName(row, column){
+        if(this.state.stepSequencerMatrix[row][column] == 0){
+            return("asexual")
+        } else if(this.state.stepSequencerMatrix[row][column] == 1){
+            switch(row){
+                case 0: return("circle")
+                case 1: return("square full")
+                case 2: return("circle")
+                case 3: return("square full")
+                case 4: return("circle")
+                
+            }
+        } 
+
+    }
+
     setIconColor(row, column){
         if(this.state.stepSequencerMatrix[row][column] == 0){
             return(colors.grey)
         } else if((this.state.stepSequencerMatrix[row][column] == 1) && (this.state.stepSequencerMatrix2[row][column] != 2)){
-            return(colors.darkgrey)
+            //return(colors.darkgrey)
+            switch(row){
+                case 0: return(colors.adobeColorCCred01)
+                case 1: return(colors.adobeColorCCred02)
+                case 2: return(colors.adobeColorCCred03)
+                case 3: return(colors.adobeColorCCred04)
+                case 4: return(colors.adobeColorCCred05)
+                
+            }
         } else if(this.state.stepSequencerMatrix2[row][column] == 2){
             return("yellow")
         }
@@ -229,7 +252,7 @@ export default class Workspace extends Component {
                             animation={animationName} 
                             duration={animationDuration}>
                               <Popup
-                            trigger={<Icon name="music" size={iconSize} onClick={this.toggleVisibility} style={{color:iconColor}}></Icon>}
+                            trigger={<Icon name="music" size={iconSize} style={{color:iconColor, cursor: "pointer"}}></Icon>}
                             on='hover'
                              hoverable 
                         >
@@ -241,15 +264,15 @@ export default class Workspace extends Component {
                             <Button.Or/></React.Fragment>
                             ))
                             */}
-                            <Button onClick={() => this.setPattern(row, 1)}>1</Button>
+                            <Button onClick={() => this.setPattern(row, 1)}><h4>1</h4></Button>
                             <Button.Or />
-                            <Button onClick={() => this.setPattern(row, 2)}>2</Button>
+                            <Button onClick={() => this.setPattern(row, 2)}><h4>2</h4></Button>
                             <Button.Or />
-                            <Button onClick={() => this.setPattern(row, 3)}>3</Button>
+                            <Button onClick={() => this.setPattern(row, 3)}><h4>3</h4></Button>
                             <Button.Or />
-                            <Button onClick={() => this.setPattern(row, 4)}>4 </Button>
+                            <Button onClick={() => this.setPattern(row, 4)}><h4>4</h4></Button>
                             <Button.Or />
-                            <Button onClick={() => this.setPattern(row, 5)}>5 </Button>
+                            <Button onClick={() => this.setPattern(row, 5)}><h4>5</h4></Button>
                         </Button.Group>
 
                         
@@ -269,7 +292,7 @@ export default class Workspace extends Component {
                             <Grid.Column key={column}> 
                                 <Transition visible={visible} animation={animationName} duration={animationDuration}>
                                     <Icon   id={row.toString() + column.toString()} 
-                                            name="circle" 
+                                            name={this.setIconName(row, column)}
                                             size={iconSize} 
                                             style={{color:this.setIconColor(row, column), cursor: "pointer"}}
                                             /*onClick={this.setValueInStepSequencerMatrix(row, column)}*/
