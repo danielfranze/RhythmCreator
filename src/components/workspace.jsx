@@ -286,7 +286,7 @@ export default class Workspace extends Component {
             >
               <Button.Group size="massive">
                 {_.times(5, index => (
-                  <React.Fragment>
+                  <React.Fragment key={"pattern_button" + index.toString()}>
                     <Button onClick={() => this.setPattern(row, index + 1)}>
                       <h4>{index + 1}</h4>
                     </Button>
@@ -304,7 +304,7 @@ export default class Workspace extends Component {
           <Grid textAlign="center">
             <Grid.Row>
               {_.times(numberOfColumns, column => (
-                <Grid.Column key={column}>
+                <Grid.Column key={"tonefield" + row.toString() + column.toString()}>
                   <Transition
                     visible={visible}
                     animation={toneFieldsAnimationName}
